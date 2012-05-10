@@ -1,0 +1,141 @@
+Using PCRaster implies to agree with the license present in the file LICENSE.
+
+INSTALLING PCRaster on Linux
+----------------------------
+
+If you want to use PCRaster as a single user extract the contents of
+the compressed file in your home directory:
+
+$ cd
+$ tar -xf PCRaster-*.tar.gz
+
+If several users use PCRaster extract as root user:
+
+# cd /usr/local
+# tar -xf PCRaster-*.tar.gz
+
+The zip file contains the following directories:
+ - bin with the PCRaster binaries,
+ - lib with the shared libraries,
+ - Python with the files for the Python extension,
+ - Documentation
+ - workspace with PCRaster and PCRasterPython examples.
+
+The user must add the 'bin' directory to the PATH and 'Python'
+to the PYTHONPATH environment variable.
+
+The easiest way to accomplish this is to add the following lines to the user
+profile (e.g. for the login bash use ~/.bash_profile, for a remote bash login
+use ~/.bashrc):
+
+Determine to which sub folder of /usr/local the tar command has extracted PCRaster; The file you are reading now is in that folder (PCRaster-3.0 is most likely but the numbers may be different). Put that folder in the PCRASTER environment variable in the user profile and use the PCRASTER variable in the PATH and PYTHONPATH variables.
+
+export PCRASTER=/usr/local/PCRaster-3.0
+export PATH=$PCRASTER/bin:$PATH
+export PYTHONPATH=$PCRASTER/Python:$PYTHONPATH
+
+Note: if you are using another shell than bash (e.g. csh, ksh) you have to set
+the environment variables according to their regulations.
+
+Log out and log in again to activate the above user profile settings.
+After log in, check if the paths settings contains the intended PCRaster settings:
+
+$ echo $PATH
+$ echo $PYTHONPATH
+
+If you have a developers license then install the supplied personal license 
+(named PCRasterLicense) in a subdirectory named .PCRaster of your home directory:
+
+$ mkdir -p ~/.PCRaster
+$ cp PCRasterLicense ~/.PCRaster
+
+
+PCRASTER PYTHON
+---------------
+
+The PCRaster Python extension requires Python version 2.7 to be installed.
+Furthermore, PCRaster Python depends on the NumPy package. Install it with e.g.
+# apt-get install python-numpy
+
+A message like
+Fatal Python error: Interpreter not initialized (version mismatch?)
+Aborted
+indicates that you are using the wrong Python version, use python2.7 to run
+scripts instead.
+
+
+TESTING THE INSTALLATION
+------------------------
+
+Now change to the PCRasterWorkspace/Demo subdirectory. You should be able to execute the demo
+models:
+
+$ pcrcalc -f runoff.mod
+
+and
+
+$ python2.7 runoff.py
+
+
+If you get messages similar to
+
+$ pcrcalc
+-bash: /opt/PCRaster-3.0/bin/pcrcalc: No such file or directory
+
+check the LSB section below.
+
+
+LINUX STANDARD BASE (LSB) VERSION
+---------------------------------
+
+The LSB version of PCRaster enables you to execute the applications on various, LSB compliant
+distributions. At the moment, PCRaster supports LSB version 3.2. To display the LSB version your
+distribution supports type
+
+$ lsb_release
+
+this will return a list of installed LSB packages and version numbers like 'desktop-3.2-noarch'.
+
+On Debian based systems, you can install necessary LSB packages by
+
+# apt-get install lsb
+
+
+
+DOCUMENTATION
+-------------
+
+We recommend to bookmark the doc/index.html page in your webbrowser for
+a convenient access to the documentation.
+
+
+THIRD PARTY LIBRARIES
+---------------------
+
+On some systems necessary libraries are not installed by default. If you get
+errors like
+
+$ pcrcalc
+pcrcalc: error while loading shared libraries: libgthread-2.0.so.0: cannot open
+shared object file: No such file or directory
+
+install the glib2 library with e.g.
+# apt-get install libglib2.0-0
+
+
+
+THIRD PARTY APPLICATIONS
+------------------------
+
+The PCRaster package does not include the following applications. Browse
+their project websites for informations about software install.
+- gstat: http://www.gstat.org/
+- gnuplot: http://www.gnuplot.info/
+
+
+CURRENT ISSUES
+--------------
+
+There are no 'display' and 'timeplot' programs in the distribution. Use
+'aguila' instead.
+See the PCRaster website for documentation.

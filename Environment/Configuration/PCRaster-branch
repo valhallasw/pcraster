@@ -1,0 +1,23 @@
+# vim:syntax=sh
+
+buildType=$1
+
+_personalConfiguration="$PROJECTS/DevEnv/Configuration/personal/Kor"
+
+source "$_personalConfiguration/Profiles/common" $buildType
+
+# Load project settings.
+source "$_personalConfiguration/Profiles/DevEnv"
+source "$_personalConfiguration/Profiles/RasterFormat"
+source "$_personalConfiguration/Profiles/Xsd"
+source "$_personalConfiguration/Profiles/Dal"
+source "$_personalConfiguration/Profiles/Aguila"
+source "$_personalConfiguration/Profiles/PcrTree2"
+source "$_personalConfiguration/Profiles/DataAssimilation"
+source "$PROJECTS/PCRaster/Environment/Configuration/PCRaster"
+
+cd $PCRASTER
+setPromptForProject PCRaster $PCRSTER_BRANCH $BUILD_TYPE
+
+unset _personalConfiguration
+
