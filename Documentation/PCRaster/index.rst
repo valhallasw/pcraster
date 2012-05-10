@@ -69,7 +69,6 @@ External applications
 The distribution includes gstat and gnuplot executables. Newer versions and documentation are available at the <a href="http://www.gstat.org/">gstat</a> and <a href="http://www.gnuplot.info/">gnuplot</a> websites.
 
 ..
-
    Indices and tables
    ==================
 
