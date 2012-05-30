@@ -15,7 +15,7 @@ source "$PROJECTS/PCRaster/Environment/Configuration/PCRaster-branch" $buildType
 
 # export CDPATH=$CDPATH:$PCRaster/Sources/...
 # _baseName=`basename $PCRASTER`
-# export PATH=$OBJECTS/$_baseName/bin:$PATH
+export PATH="$PCRASTER/Scripts:$PATH"
 
 # unset _basename
 
