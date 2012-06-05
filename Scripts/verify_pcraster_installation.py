@@ -13,10 +13,10 @@ import sys
 def check_existance_of_root_directories(
         directory_names):
     required_directory_names = ["doc", "Python", "share"]
-    if sys.platform == "win32":
-        required_directory_names += ["apps"]
-    else:
-        required_directory_names += ["bin", "lib", "PCRasterWorkspace"]
+    ### if sys.platform == "win32":
+    ###     required_directory_names += ["apps"]
+    ### else:
+    required_directory_names += ["bin", "lib"] # , "PCRasterWorkspace"]
 
     for directory_name in required_directory_names:
         if not directory_name in directory_names:
@@ -34,10 +34,10 @@ def check_existance_of_root_directories(
 
 def check_existance_of_root_files(
         file_names):
-    required_file_names = ["INSTALL_LINUX.TXT", "LICENSE.TXT"]
+    ### required_file_names = ["INSTALL_LINUX.TXT", "LICENSE.TXT"]
 
-    if sys.platform == "win32":
-        required_file_names += ["Uninstall.exe"]
+    ### if sys.platform == "win32":
+    ###     required_file_names += ["Uninstall.exe"]
 
     for file_name in required_file_names:
         if not file_name in file_names:
