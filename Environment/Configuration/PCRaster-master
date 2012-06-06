@@ -8,6 +8,7 @@ export DAL_BRANCH=master
 export DATAASSIMILATION_BRANCH=master
 export PCRTREE2_BRANCH=master
 export AGUILA_BRANCH=master
+export PCRASTER_BRANCH=master
 
 buildType=$1
 
