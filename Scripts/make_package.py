@@ -15,7 +15,8 @@ def cpack_archive_generator_name():
 
 def make_package(
         build,
-        rebuild):
+        rebuild,
+        build_packages):
     result = 0
 
     try:
@@ -24,17 +25,18 @@ def make_package(
         build_type = devenv.build_type()
         project_names = devenv.project_names()
         if build:
-          if rebuild:
-              devenv.rebuild_projects(project_names, build_type)
-          else:
-              devenv.build_projects(project_names, build_type)
+            if rebuild:
+                devenv.rebuild_projects(project_names, build_type)
+            else:
+                devenv.build_projects(project_names, build_type)
 
         # For each relevant project, create a package using an archive
         # generator.
-        packageable_project_names = ["Aguila", "PcrTree2"]
+        packageable_project_names = ["Aguila", "PcrTree2", "DataAssimilation"]
         cpack_generator_name = cpack_archive_generator_name()
-        devenv.build_packages(packageable_project_names, cpack_generator_name,
-            build_type)
+        if build_packages:
+            devenv.build_packages(packageable_project_names,
+                cpack_generator_name, build_type)
 
         # Unzip the archives in different directories.
         package_path_names = devenv.package_path_names(
@@ -139,6 +141,10 @@ if __name__ == "__main__":
         help="skip build of targets")
     parser.add_argument("--no_rebuild", dest="rebuild", action="store_const",
         const=False, default=True, help="build targets instead of rebuild)")
+    parser.add_argument("--skip_build_packages", dest="build_packages",
+        action="store_const", const=False, default=True,
+        help="skip build of packages")
     arguments = parser.parse_args()
-    sys.exit(make_package(build=arguments.build, rebuild=arguments.rebuild))
+    sys.exit(make_package(build=arguments.build, rebuild=arguments.rebuild,
+        build_packages=arguments.build_packages))
 

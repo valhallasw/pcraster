@@ -12,11 +12,8 @@ import sys
 
 def check_existance_of_root_directories(
         directory_names):
-    required_directory_names = ["doc", "Python", "share"]
-    ### if sys.platform == "win32":
-    ###     required_directory_names += ["apps"]
-    ### else:
-    required_directory_names += ["bin", "lib"] # , "PCRasterWorkspace"]
+    required_directory_names = ["bin", "doc", "lib", "plugins", "Python",
+        "share"]
 
     for directory_name in required_directory_names:
         if not directory_name in directory_names:
@@ -35,6 +32,8 @@ def check_existance_of_root_directories(
 def check_existance_of_root_files(
         file_names):
     ### required_file_names = ["INSTALL_LINUX.TXT", "LICENSE.TXT"]
+    # TODO Get rid of CMake file.
+    required_file_names = ["CMakeLists.txt"]
 
     ### if sys.platform == "win32":
     ###     required_file_names += ["Uninstall.exe"]
