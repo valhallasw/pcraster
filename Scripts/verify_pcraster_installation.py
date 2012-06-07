@@ -32,6 +32,7 @@ def check_existance_of_root_directories(
 def check_existance_of_root_files(
         file_names):
     ### required_file_names = ["INSTALL_LINUX.TXT", "LICENSE.TXT"]
+    required_file_names = []
 
     ### if sys.platform == "win32":
     ###     required_file_names += ["Uninstall.exe"]

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import argparse
 import os
+import multiprocessing
 import shutil
 import sys
 import traceback
@@ -76,7 +77,8 @@ INCLUDE(Site)
 FILE(GLOB FILE_NAMES *)
 FOREACH(FILE_NAME IN ITEMS ${FILE_NAMES})
   GET_FILENAME_COMPONENT(NAME ${FILE_NAME} NAME)
-  IF(${NAME} EQUAL CMakeLists.txt)
+  MESSAGE(${NAME})
+  IF(${NAME} STREQUAL "CMakeLists.txt")
     LIST(REMOVE_ITEM FILE_NAMES ${FILE_NAME})
   ENDIF()
 ENDFOREACH()
