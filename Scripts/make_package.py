@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import argparse
 import os
-import multiprocessing
 import shutil
 import sys
 import traceback
