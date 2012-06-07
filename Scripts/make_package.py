@@ -140,7 +140,7 @@ if __name__ == "__main__":
         const=False, default=True,
         help="skip build of targets")
     parser.add_argument("--no_rebuild", dest="rebuild", action="store_const",
-        const=False, default=True, help="build targets instead of rebuild)")
+        const=False, default=True, help="build targets instead of rebuild")
     parser.add_argument("--skip_build_packages", dest="build_packages",
         action="store_const", const=False, default=True,
         help="skip build of packages")

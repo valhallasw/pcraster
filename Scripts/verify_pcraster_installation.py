@@ -32,8 +32,6 @@ def check_existance_of_root_directories(
 def check_existance_of_root_files(
         file_names):
     ### required_file_names = ["INSTALL_LINUX.TXT", "LICENSE.TXT"]
-    # TODO Get rid of CMake file.
-    required_file_names = ["CMakeLists.txt"]
 
     ### if sys.platform == "win32":
     ###     required_file_names += ["Uninstall.exe"]
@@ -97,16 +95,29 @@ def check_existance_of_files_and_directories(
     check_existance_of_root_files(root_file_names)
 
     directory_names = [
+        # "doc/aguila"
+        # "doc/demo"
+        # "doc/manual"
+        # "doc/modflow"
+        # "doc/python/pcraster"
+        # "doc/python/pcraster/framework"
+        # Developer  manual  PCRasterModflow  PCRasterPython  PCRasterPythonFramework
         "Python",
         "Python/PCRaster",
         "Python/PCRaster/Framework"
     ]
     check_existance_of_directories(prefix, directory_names)
 
-    file_names = [
-        "Python/PCRaster/__init__.py",
-        "Python/PCRaster/Framework/__init__.py"
-    ]
+    # [ "doc/{}/index.html".format(name) for name in ["aguila", "demo", "manual", "modflow"] +
+    # "doc/python/pcraster/index.html",
+    # "doc/python/pcraster/framework/index.html",
+
+    file_names = \
+        ["bin/{}".format(name) for name in [
+            "aguila", "asc2map", "col2map", "legend", "map2asc", "map2col",
+            "mapattr", "oldcalc", "pcrcalc", "pcrseal", "resample", "table"]
+        ] + \
+        ["Python/PCRaster/__init__.py", "Python/PCRaster/Framework/__init__.py" ]
     check_existance_of_files(prefix, file_names)
 
 
