@@ -40,7 +40,7 @@ def make_package(
 
         # Unzip the archives in different directories.
         package_path_names = devenv.package_path_names(
-            packageable_project_names, cpack_generator_name)
+            packageable_project_names, build_type, cpack_generator_name)
         binary_directory_path_name = devenv.project_binary_directory_path_name(
             "PCRaster")
         assert os.path.isdir(binary_directory_path_name)
@@ -113,7 +113,7 @@ INCLUDE(CPack)
 
         # Unpack package.
         package_path_name = devenv.package_path_name("PCRasterPackage",
-            cpack_generator_name)
+            build_type, cpack_generator_name)
         binary_directory_path_name = devenv.project_binary_directory_path_name(
             "PCRasterPackage")
         assert os.path.isdir(binary_directory_path_name)
