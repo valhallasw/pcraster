@@ -7,6 +7,8 @@ import argparse
 import os
 import subprocess
 import sys
+import traceback
+import devenv
 
 
 
@@ -129,6 +131,20 @@ def verify_python_package(
     subprocess.check_call(["python", "-c", "import PCRaster.Framework"])
 
 
+def check_shared_libraries(
+        prefix):
+    shared_library_path_names, missing_shared_library_names = \
+        devenv.shared_library_dependencies([
+            os.path.join(prefix, "bin", "aguila"),
+            os.path.join(prefix, "bin", "pcrcalc"),
+            os.path.join(prefix, "bin", "oldcalc")])
+    system_shared_library_path_names, external_shared_library_path_names, \
+        package_shared_library_path_names = \
+            devenv.split_shared_library_path_names(shared_library_path_names)
+    if external_shared_library_path_names:
+        raise RuntimeError(
+            "The folowing 3rd party libraries are missing from the package:\n"
+            "{}".format("\n".join(external_shared_library_path_names)))
 
 def verify_installation(
         prefix):
@@ -137,10 +153,14 @@ def verify_installation(
     try:
         check_existance_of_files_and_directories(prefix)
         verify_python_package(prefix)
+        check_shared_libraries(prefix)
         sys.stdout.write("installation seems fine!\n")
-    except Exception, exception:
-        sys.stderr.write("installation is not OK!\n")
-        sys.stderr.write("error: {0}\n".format(str(exception)))
+    # except Exception, exception:
+    #     sys.stderr.write("installation is not OK!\n")
+    #     sys.stderr.write("error: {0}\n".format(str(exception)))
+    #     result = 1
+    except:
+        traceback.print_exc(file=sys.stderr)
         result = 1
 
     return result
