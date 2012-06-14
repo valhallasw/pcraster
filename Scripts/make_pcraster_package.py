@@ -9,10 +9,6 @@ import devenv
 import verify_pcraster_installation
 
 
-
-def cpack_archive_generator_name():
-    return "ZIP" if sys.platform == "win32" else "TGZ"
-
 def make_package(
         build,
         rebuild,
@@ -20,8 +16,7 @@ def make_package(
     result = 0
 
     try:
-        # (Re)build all projects that are part of PCRaster, in the current build
-        # type.
+        # (Re)build all projects, in the current build type.
         build_type = devenv.build_type()
         project_names = devenv.project_names()
         if build:
@@ -33,7 +28,7 @@ def make_package(
         # For each relevant project, create a package using an archive
         # generator.
         packageable_project_names = ["Aguila", "PcrTree2", "DataAssimilation"]
-        cpack_generator_name = cpack_archive_generator_name()
+        cpack_generator_name = devenv.cpack_archive_generator_name()
         if build_packages:
             devenv.build_packages(packageable_project_names,
                 cpack_generator_name, build_type)
@@ -42,7 +37,7 @@ def make_package(
         package_path_names = devenv.package_path_names(
             packageable_project_names, build_type, cpack_generator_name)
         binary_directory_path_name = devenv.project_binary_directory_path_name(
-            "PCRaster")
+            "PCRaster", build_type)
         assert os.path.isdir(binary_directory_path_name)
         devenv.unpack_packages(package_path_names, binary_directory_path_name)
 
@@ -54,8 +49,7 @@ def make_package(
                 package_base_name in package_base_names]
         pcraster_package_source_directory_path_name = os.path.join(
             binary_directory_path_name, "PCRasterPackage")
-        if os.path.isdir(pcraster_package_source_directory_path_name):
-            shutil.rmtree(pcraster_package_source_directory_path_name)
+        devenv.remove_directory(pcraster_package_source_directory_path_name)
         devenv.merge_packages(package_directory_path_names,
             pcraster_package_source_directory_path_name)
 
@@ -76,7 +70,6 @@ INCLUDE(Site)
 FILE(GLOB FILE_NAMES *)
 FOREACH(FILE_NAME IN ITEMS ${FILE_NAMES})
   GET_FILENAME_COMPONENT(NAME ${FILE_NAME} NAME)
-  MESSAGE(${NAME})
   IF(${NAME} STREQUAL "CMakeLists.txt")
     LIST(REMOVE_ITEM FILE_NAMES ${FILE_NAME})
   ENDIF()
@@ -116,7 +109,7 @@ INCLUDE(CPack)
         package_path_name = devenv.package_path_name("PCRasterPackage",
             build_type, cpack_generator_name)
         binary_directory_path_name = devenv.project_binary_directory_path_name(
-            "PCRasterPackage")
+            "PCRasterPackage", build_type)
         assert os.path.isdir(binary_directory_path_name)
         devenv.unpack_package(package_path_name, binary_directory_path_name)
 
@@ -127,12 +120,12 @@ INCLUDE(CPack)
         verify_pcraster_installation.verify_installation(
             package_directory_path_name)
 
+        devenv.remove_directory(package_directory_path_name)
         del os.environ["PCRASTERPACKAGE"]
     except:
         traceback.print_exc(file=sys.stderr)
         result = 1
     return result
-
 
 
 if __name__ == "__main__":
@@ -146,5 +139,13 @@ if __name__ == "__main__":
         action="store_const", const=False, default=True,
         help="skip build of packages")
     arguments = parser.parse_args()
-    sys.exit(make_package(build=arguments.build, rebuild=arguments.rebuild,
-        build_packages=arguments.build_packages))
+    build = arguments.build
+    rebuild = arguments.rebuild
+    build_packages = arguments.build_packages
+
+    # If the user wants to skip building of the packages of the sub-projects,
+    # then there is no point in building the targets of the sub-projects.
+    build = False if not build_packages else build
+
+    sys.exit(make_package(build=build, rebuild=rebuild,
+        build_packages=build_packages))
