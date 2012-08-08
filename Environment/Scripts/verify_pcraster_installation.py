@@ -26,7 +26,7 @@ def verify_installation(
             # Developer  manual  PCRasterModflow  PCRasterPython  PCRasterPythonFramework
             "Python",
             "Python/PCRaster",
-            "Python/PCRaster/Framework"
+            "Python/PCRaster/Framework",
             "share/gdal"
         ],
         required_file_path_names=

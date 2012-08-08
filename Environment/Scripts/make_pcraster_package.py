@@ -38,6 +38,7 @@ def make_package(
             packageable_project_names, build_type, cpack_generator_name)
         binary_directory_path_name = devenv.project_binary_directory_path_name(
             "PCRaster", build_type)
+        # Did you configure the PCRaster project?
         assert os.path.isdir(binary_directory_path_name)
         devenv.unpack_packages(package_path_names, binary_directory_path_name)
 
@@ -86,7 +87,8 @@ FOREACH(FILE_NAME IN ITEMS ${FILE_NAMES})
   ENDIF()
 ENDFOREACH()
 
-INSTALL(DIRECTORY ${DIRECTORY_PATH_NAMES} DESTINATION .)
+INSTALL(DIRECTORY ${DIRECTORY_PATH_NAMES} DESTINATION .
+  USE_SOURCE_PERMISSIONS)
 INSTALL(FILES ${REGULAR_FILE_PATH_NAMES} DESTINATION .)
 
 SET(CPACK_PACKAGE_NAME PCRaster)
@@ -94,6 +96,7 @@ SET(CPACK_PACKAGE_VERSION_MAJOR ${PCRASTERPACKAGE_MAJOR_VERSION})
 SET(CPACK_PACKAGE_VERSION_MINOR ${PCRASTERPACKAGE_MINOR_VERSION})
 SET(CPACK_PACKAGE_VERSION_PATCH ${PCRASTERPACKAGE_PATCH_VERSION})
 
+INCLUDE(DefaultCPackSettings)
 INCLUDE(CPack)
 """)
 
