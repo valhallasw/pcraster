@@ -38,8 +38,7 @@ def make_package(
             packageable_project_names, build_type, cpack_generator_name)
         binary_directory_path_name = devenv.project_binary_directory_path_name(
             "PCRaster", build_type)
-        # Did you configure the PCRaster project?
-        assert os.path.isdir(binary_directory_path_name)
+        assert os.path.isdir(binary_directory_path_name), "Configure project"
         devenv.unpack_packages(package_path_names, binary_directory_path_name)
 
         # Merge the contents in a new directory.
