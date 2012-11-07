@@ -5,4 +5,3 @@ assertBranchIsCheckedOut PCRaster $PCRASTER $PCRASTER_BRANCH
 sourceIfExists "$PCRASTER/Environment/Configuration/bash_profile"
 
 export DEVENV_PROJECTS="$DEVENV_PROJECTS PCRaster"
-

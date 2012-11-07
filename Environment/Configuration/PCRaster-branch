@@ -20,4 +20,3 @@ cd $PCRASTER
 setPromptForProject PCRaster $PCRSTER_BRANCH $BUILD_TYPE
 
 unset _personalConfiguration
-
