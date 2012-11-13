@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+set -x
 
 # Where to build targets.
 build_root=$1
@@ -98,4 +99,4 @@ export LD_LIBRARY_PATH=$ld_library_path
 export PYTHONPATH=$python_path
 install_project data_assimilation
 
-# fixup.py $install_prefix $external_prefix
+fixup.py $install_prefix $external_prefix
