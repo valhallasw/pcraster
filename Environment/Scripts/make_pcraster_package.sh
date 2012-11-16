@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+set -x
 
 # Where to build targets.
 build_root=$1
@@ -54,48 +55,57 @@ function install_project() {
 }
 
 
-build_project devenv ""
-build_project raster_format ""
-build_project xsd "
-    -DDEVENV_ROOT=$build_root/devenv_$build_type
-"
-build_project dal "
-    -DDEVENV_ROOT=$build_root/devenv_$build_type
-    -DRASTERFORMAT_ROOT=$build_root/raster_format_$build_type
-"
-build_project aguila "
-    -DDEVENV_ROOT=$build_root/devenv_$build_type
-    -DXSD_ROOT=$build_root/xsd_$build_type
-    -DDAL_ROOT=$build_root/dal_$build_type
-"
-ld_library_path=$LD_LIBRARY_PATH
-python_path=$PYTHONPATH
-export LD_LIBRARY_PATH="$build_root/pcrtree2_$build_type/bin:$LD_LIBRARY_PATH"
-export PYTHONPATH="$build_root/pcrtree2_$build_type/bin:$PYTHONPATH"
-build_project pcrtree2 "
-    -DDEVENV_ROOT=$build_root/devenv_$build_type
-    -DXSD_ROOT=$build_root/xsd_$build_type
-    -DDAL_ROOT=$build_root/dal_$build_type
-    -DRASTERFORMAT_ROOT=$build_root/raster_format_$build_type
-"
-export LD_LIBRARY_PATH=$ld_library_path
-export PYTHONPATH=$python_path
-build_project data_assimilation "
-    -DDEVENV_ROOT=$build_root/devenv_$build_type
-"
-build_project pcraster ""
+function build_projects() {
+    build_project devenv ""
+    build_project raster_format ""
+    build_project xsd "
+        -DDEVENV_ROOT=$build_root/devenv_$build_type
+    "
+    build_project dal "
+        -DDEVENV_ROOT=$build_root/devenv_$build_type
+        -DRASTERFORMAT_ROOT=$build_root/raster_format_$build_type
+    "
+    build_project aguila "
+        -DDEVENV_ROOT=$build_root/devenv_$build_type
+        -DXSD_ROOT=$build_root/xsd_$build_type
+        -DDAL_ROOT=$build_root/dal_$build_type
+    "
+    ld_library_path=$LD_LIBRARY_PATH
+    python_path=$PYTHONPATH
+    export LD_LIBRARY_PATH="$build_root/pcrtree2_$build_type/bin:$LD_LIBRARY_PATH"
+    export PYTHONPATH="$build_root/pcrtree2_$build_type/bin:$PYTHONPATH"
+    build_project pcrtree2 "
+        -DDEVENV_ROOT=$build_root/devenv_$build_type
+        -DXSD_ROOT=$build_root/xsd_$build_type
+        -DDAL_ROOT=$build_root/dal_$build_type
+        -DRASTERFORMAT_ROOT=$build_root/raster_format_$build_type
+    "
+    export LD_LIBRARY_PATH=$ld_library_path
+    export PYTHONPATH=$python_path
+    build_project data_assimilation "
+        -DDEVENV_ROOT=$build_root/devenv_$build_type
+    "
+    build_project pcraster ""
+}
 
-rm -fr $install_prefix
 
-install_project dal
-install_project aguila
-ld_library_path=$LD_LIBRARY_PATH
-python_path=$PYTHONPATH
-export LD_LIBRARY_PATH="$build_root/pcrtree2_$build_type/bin:$LD_LIBRARY_PATH"
-export PYTHONPATH="$build_root/pcrtree2_$build_type/bin:$PYTHONPATH"
-install_project pcrtree2
-export LD_LIBRARY_PATH=$ld_library_path
-export PYTHONPATH=$python_path
-install_project data_assimilation
+function install_projects() {
+    rm -fr $install_prefix
 
-# fixup.py $install_prefix $external_prefix
+    install_project dal
+    install_project aguila
+    ld_library_path=$LD_LIBRARY_PATH
+    python_path=$PYTHONPATH
+    export LD_LIBRARY_PATH="$build_root/pcrtree2_$build_type/bin:$LD_LIBRARY_PATH"
+    export PYTHONPATH="$build_root/pcrtree2_$build_type/bin:$PYTHONPATH"
+    install_project pcrtree2
+    export LD_LIBRARY_PATH=$ld_library_path
+    export PYTHONPATH=$python_path
+    install_project data_assimilation
+}
+
+
+# build_projects
+install_projects
+fixup.py $install_prefix $external_prefix
+verify_pcraster_installation.py $install_prefix
