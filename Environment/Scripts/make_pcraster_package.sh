@@ -108,4 +108,4 @@ function install_projects() {
 # build_projects
 install_projects
 fixup.py $install_prefix $external_prefix
-verify_pcraster_installation.py
+verify_pcraster_installation.py $install_prefix
