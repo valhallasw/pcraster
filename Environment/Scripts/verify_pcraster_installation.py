@@ -57,6 +57,7 @@ if __name__ == "__main__":
 
     try:
         verify_installation(prefix)
+        result = 0
     except:
         traceback.print_exc(file=sys.stderr)
         result = 1
