@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-install_prefix=
-
-export MAKEFLAGS="-j4"
-
 build_type="Release"
 base_name="pcraster-`date +%Y%m%d`"
 build_root=`pwd`
