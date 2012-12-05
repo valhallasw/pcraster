@@ -1,6 +1,5 @@
 SET(SPHINX_SOURCES
-  index.rst
+    index.rst
 )
 SET(SPHINX_TARGET pcraster)
 INCLUDE(SphinxDoc)
-
