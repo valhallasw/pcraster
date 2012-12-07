@@ -7,7 +7,7 @@ export XSD_BRANCH=refactoring
 export DAL_BRANCH=refactoring
 export DATAASSIMILATION_BRANCH=refactoring
 export PCRTREE2_BRANCH=refactoring
-export AGUILA_BRANCH=refactoring
+export AGUILA_BRANCH=master
 export PCRASTER_BRANCH=master
 
 buildType=$1
