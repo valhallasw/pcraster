@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
+if [[ $CC == *lsb* ]]; then
+    export LSBCC_SHAREDLIBS=gdal
+fi
+
+export LD_LIBRARY_PATH="$PYTHON_ROOT/lib"
+
 build_type="Release"
-base_name="pcraster-`date +%Y%m%d`"
+base_name="pcraster-${PCRTEAM_PLATFORM##*/}-`date +%Y%m%d`"
 build_root=`pwd`
 install_prefix=`pwd`/$base_name
 

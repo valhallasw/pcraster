@@ -13,8 +13,18 @@ import devenv
 def verify_installation(
         prefix):
     devenv.verify_package(prefix=prefix,
-        required_root_directory_names=["bin", "doc", "lib", "Python", "share"],
-        # required_file_names = ["INSTALL_LINUX.TXT", "LICENSE.TXT"]
+        required_root_directory_names=["bin", "doc", "lib", "python", "share"],
+        # required_file_path_names = ["INSTALL_LINUX.TXT", "LICENSE.TXT"]
+        # required_file_path_names = ["LICENSE.TXT"],
+
+
+        # LICENSE.TXT
+        # 
+        # doc/Aguila/COPYING
+        # doc/Aguila/Gpl-2.txt
+        # 
+        # doc/version.txt
+
         required_root_file_names=[],
         required_directory_path_names=[
             # "doc/aguila"
@@ -24,28 +34,93 @@ def verify_installation(
             # "doc/python/pcraster"
             # "doc/python/pcraster/framework"
             # Developer  manual  PCRasterModflow  PCRasterPython  PCRasterPythonFramework
-            "Python",
-            "Python/PCRaster",
-            "Python/PCRaster/Framework",
+            "bin",
+            "doc",
+            "doc/developer",
+            "doc/developer/c",
+            "doc/developer/c/include",
+            "doc/developer/linkout",
+            "doc/developer/linkout/csharp",
+            "doc/developer/xsd",
+            "lib",
+            "python",
+            "python/PCRaster",
+            "python/PCRaster/Collection",
+            "python/PCRaster/Framework",
+            "python/PCRaster/Moc",
+            "python/PCRaster/Mldd",
+            "python/PCRaster/NumPy",
+            "share",
             "share/gdal"
         ],
         required_file_path_names=
-            # [ "doc/{}/index.html".format(name) for name in ["aguila", "demo", "manual", "modflow"] +
-            # "doc/python/pcraster/index.html",
-            # "doc/python/pcraster/framework/index.html",
-            ["bin/{}".format(name) for name in [
-                "aguila", "asc2map", "col2map", "legend", "map2asc", "map2col",
-                "mapattr", "oldcalc", "pcrcalc", "pcrseal", "resample", "table"]
+            [os.path.join("doc", name, "index.html") for name in [
+                "aguila",
+                "manual",
+                "modflow"
+            ]] + \
+            [
+                "doc/developer/c/include/pcrcalc.h",
+                "doc/developer/c/include/pcrdll.h",
+                # "doc/developer/linkout/deployment.txt",
+                "doc/developer/linkout/LinkOutAPIUserManual.pdf",
+                "doc/developer/linkout/html/index.html",
+                "doc/developer/xsd/PCRaster.xsd",
+                "doc/developer/xsd/commonTypes.xsd",
+                "doc/python/manual/index.html",
+                # "doc/python/framework/index.html"
+                # "doc/python/arrayed_variables/index.html"
             ] + \
-            ["Python/PCRaster/__init__.py",
-                "Python/PCRaster/Framework/__init__.py" ],
+            [os.path.join("bin", name) for name in [
+                "aguila",
+                "asc2map",
+                "col2map",
+                "legend",
+                "map2asc",
+                "map2col",
+                "mapattr",
+                "oldcalc",
+                "pcrcalc",
+                "pcrseal",
+                "resample",
+                "table"
+            ]] + \
+            [
+                os.path.join("python", "pcraster.py")
+            ] + \
+            [os.path.join("python", "PCRaster", name) for name in [
+                "__init__.py",
+                "Framework/__init__.py"
+            ]] + \
+            [
+                # "LICENSE.TXT",
+                "lib/PCRasterModflow.xml",
+                "share/gdal/LICENSE.TXT"
+            ],
         executable_path_names=[
-            os.path.join(prefix, "bin", "aguila"),
-            os.path.join(prefix, "bin", "pcrcalc"),
-            os.path.join(prefix, "bin", "oldcalc")],
-        python_package_directory_name="Python",
-        python_package_names=["PCRaster", "PCRaster.Framework"])
-    result = 0
+            os.path.join(prefix, "bin", name) for name in [
+                "aguila",
+                "asc2map",
+                "col2map",
+                "legend",
+                "map2asc",
+                "map2col",
+                "mapattr",
+                "oldcalc",
+                "pcrcalc",
+                "pcrmf2k",
+                "resample"
+                "table",
+            ]],
+        python_package_directory_name="python",
+        python_package_names=[
+            "PCRaster",
+            "PCRaster.Collection",
+            "PCRaster.Framework",
+            "PCRaster.Mldd",
+            "PCRaster.Moc",
+            "PCRaster.NumPy"
+        ])
 
 
 if __name__ == "__main__":
