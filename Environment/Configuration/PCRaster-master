@@ -1,12 +1,12 @@
 # vim:syntax=sh
 
 # Set branches.
-export DEVENV_BRANCH=refactoring
-export RASTERFORMAT_BRANCH=refactoring
-export XSD_BRANCH=refactoring
+export DEVENV_BRANCH=master
+export RASTERFORMAT_BRANCH=master
+export XSD_BRANCH=master
 export DAL_BRANCH=master
-export DATAASSIMILATION_BRANCH=refactoring
-export PCRTREE2_BRANCH=refactoring
+export DATAASSIMILATION_BRANCH=master
+export PCRTREE2_BRANCH=master
 export AGUILA_BRANCH=master
 export PCRASTER_BRANCH=master
 
