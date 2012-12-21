@@ -4,7 +4,7 @@
 export DEVENV_BRANCH=refactoring
 export RASTERFORMAT_BRANCH=refactoring
 export XSD_BRANCH=refactoring
-export DAL_BRANCH=refactoring
+export DAL_BRANCH=master
 export DATAASSIMILATION_BRANCH=refactoring
 export PCRTREE2_BRANCH=refactoring
 export AGUILA_BRANCH=master
