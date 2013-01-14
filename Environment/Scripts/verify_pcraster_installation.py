@@ -109,8 +109,8 @@ def verify_installation(
                 "oldcalc",
                 "pcrcalc",
                 "pcrmf2k",
-                "resample"
-                "table",
+                "resample",
+                "table"
             ]],
         python_package_directory_name="python",
         python_package_names=[
