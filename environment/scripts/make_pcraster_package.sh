@@ -23,7 +23,7 @@ pcraster_sources="$PCRASTER"
 
 external_prefix="$PCRTEAM_EXTERN"
 
-source $DEVENV/Scripts/make_package.sh
+source $DEVENV/scripts/make_package.sh
 
 native_path $build_root native_build_root
 native_path $install_prefix native_install_prefix
