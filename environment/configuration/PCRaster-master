@@ -12,10 +12,10 @@ export PCRASTER_BRANCH=master
 
 buildType=$1
 
-source "$PROJECTS/PCRaster/Environment/Configuration/PCRaster-branch" $buildType
+source "$PROJECTS/PCRaster/environment/configuration/PCRaster-branch" $buildType
 
 # export CDPATH=$CDPATH:$PCRaster/Sources/...
 # _baseName=`basename $PCRASTER`
-export PATH="$PCRASTER/Environment/Scripts:$PATH"
+export PATH="$PCRASTER/environment/scripts:$PATH"
 
 # unset _basename
