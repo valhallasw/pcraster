@@ -64,12 +64,12 @@ def verify_installation(
             "doc/developer/xsd",
             "lib",
             "python",
-            "python/PCRaster",
-            "python/PCRaster/Collection",
-            "python/PCRaster/Framework",
-            "python/PCRaster/Moc",
-            "python/PCRaster/Mldd",
-            "python/PCRaster/NumPy",
+            "python/pcraster",
+            "python/pcraster/collection",
+            "python/pcraster/framework",
+            "python/pcraster/moc",
+            "python/pcraster/mldd",
+            "python/pcraster/numpy",
             "share",
             "share/gdal"
         ],
@@ -94,12 +94,12 @@ def verify_installation(
             [
                 os.path.join("bin", name) for name in executable_path_names
             ] + \
-            [
-                os.path.join("python", "pcraster.py")
-            ] + \
-            [os.path.join("python", "PCRaster", name) for name in [
+            # Not needed anymore. [
+            #     os.path.join("python", "pcraster.py")
+            # ] + \
+            [os.path.join("python", "pcraster", name) for name in [
                 "__init__.py",
-                "Framework/__init__.py"
+                "framework/__init__.py"
             ]] + \
             [
                 # "LICENSE.TXT",
@@ -112,12 +112,12 @@ def verify_installation(
             ],
         python_package_directory_name="python",
         python_package_names=[
-            "PCRaster",
-            "PCRaster.Collection",
-            "PCRaster.Framework",
-            "PCRaster.Mldd",
-            "PCRaster.Moc",
-            "PCRaster.NumPy"
+            "pcraster",
+            "pcraster.collection",
+            "pcraster.framework",
+            "pcraster.mldd",
+            "pcraster.moc",
+            "pcraster.numpy"
         ])
 
 

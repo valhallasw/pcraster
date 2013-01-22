@@ -45,6 +45,7 @@ function build_projects() {
         -DXSD_ROOT=$native_build_root/xsd_$build_type
         -DDAL_ROOT=$native_build_root/dal_$build_type
     "
+
     if [ $os != "Cygwin" ]; then
         configure_dll_path pcrtree2
         configure_python_path pcrtree2
@@ -59,6 +60,7 @@ function build_projects() {
         reset_dll_path
         reset_python_path
     fi
+
     if [ $os != "Cygwin" ]; then
         configure_python_path pcrtree2
     fi
