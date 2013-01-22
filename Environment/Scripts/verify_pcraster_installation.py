@@ -12,6 +12,26 @@ import devenv
 
 def verify_installation(
         prefix):
+
+    executable_path_names=[
+        "aguila",
+        "asc2map",
+        "col2map",
+        "legend",
+        "map2asc",
+        "map2col",
+        "mapattr",
+        "oldcalc",
+        "pcrcalc",
+        # TODO "pcrmf2k",
+        "resample",
+        "table"
+    ]
+
+    if sys.platform == "win32":
+        executable_path_names = ["{}.exe".format(path_name) for path_name in
+            executable_path_names]
+
     devenv.verify_package(prefix=prefix,
         required_root_directory_names=["bin", "doc", "lib", "python", "share"],
         # required_file_path_names = ["INSTALL_LINUX.TXT", "LICENSE.TXT"]
@@ -58,7 +78,7 @@ def verify_installation(
                 "aguila",
                 "manual",
                 "modflow"
-            ]] + \
+            ] if sys.platform != "win32"] + \
             [
                 "doc/developer/c/include/pcrcalc.h",
                 "doc/developer/c/include/pcrdll.h",
@@ -71,20 +91,9 @@ def verify_installation(
                 # "doc/python/framework/index.html"
                 # "doc/python/arrayed_variables/index.html"
             ] + \
-            [os.path.join("bin", name) for name in [
-                "aguila",
-                "asc2map",
-                "col2map",
-                "legend",
-                "map2asc",
-                "map2col",
-                "mapattr",
-                "oldcalc",
-                "pcrcalc",
-                "pcrseal",
-                "resample",
-                "table"
-            ]] + \
+            [
+                os.path.join("bin", name) for name in executable_path_names
+            ] + \
             [
                 os.path.join("python", "pcraster.py")
             ] + \
@@ -94,24 +103,13 @@ def verify_installation(
             ]] + \
             [
                 # "LICENSE.TXT",
-                "lib/PCRasterModflow.xml",
+                # TODO "lib/PCRasterModflow.xml",
                 "share/gdal/LICENSE.TXT"
             ],
         executable_path_names=[
-            os.path.join(prefix, "bin", name) for name in [
-                "aguila",
-                "asc2map",
-                "col2map",
-                "legend",
-                "map2asc",
-                "map2col",
-                "mapattr",
-                "oldcalc",
-                "pcrcalc",
-                "pcrmf2k",
-                "resample",
-                "table"
-            ]],
+            os.path.join(prefix, "bin", name) for name in
+                executable_path_names
+            ],
         python_package_directory_name="python",
         python_package_names=[
             "PCRaster",
