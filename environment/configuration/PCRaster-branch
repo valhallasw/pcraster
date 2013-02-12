@@ -2,7 +2,7 @@
 
 buildType=$1
 
-_personalConfiguration="$PROJECTS/`ls $PROJECTS | grep -i devenv`/configuration/personal/kor"
+_personalConfiguration="$PROJECTS/`ls $PROJECTS | grep -i \"^devenv$\"`/configuration/personal/kor"
 
 source "$_personalConfiguration/profiles/common" $buildType
 
