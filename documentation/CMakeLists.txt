@@ -1,3 +1,1 @@
-IF(NOT WIN32)
-    ADD_SUBDIRECTORY(pcraster)
-ENDIF()
+ADD_SUBDIRECTORY(pcraster)

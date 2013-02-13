@@ -23,7 +23,7 @@ def verify_installation(
         "mapattr",
         "oldcalc",
         "pcrcalc",
-        # TODO "pcrmf2k",
+        "pcrmf2k",
         "resample",
         "table"
     ]
@@ -78,7 +78,7 @@ def verify_installation(
                 "aguila",
                 "manual",
                 "modflow"
-            ] if sys.platform != "win32"] + \
+            ] + \
             [
                 "doc/developer/c/include/pcrcalc.h",
                 "doc/developer/c/include/pcrdll.h",
@@ -91,6 +91,10 @@ def verify_installation(
                 # "doc/python/framework/index.html"
                 # "doc/python/arrayed_variables/index.html"
             ] + \
+            [
+                # Needed for pcrmf2k? Check pcrtree2's CMakeLists.txt.
+                os.path.join("bin", "cygwin1.dll")
+            ] if sys.platform == "win32" + \
             [
                 os.path.join("bin", name) for name in executable_path_names
             ] + \
