@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-export PCRASTER="$PROJECTS/PCRaster"
+export PCRASTER="$PROJECTS/`ls $PROJECTS | grep -i \"^pcraster$\"`"
 assertBranchIsCheckedOut PCRaster $PCRASTER $PCRASTER_BRANCH
 sourceIfExists "$PCRASTER/environment/configuration/bash_profile"
 

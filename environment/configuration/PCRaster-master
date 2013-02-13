@@ -1,6 +1,5 @@
 # vim:syntax=sh
 
-# Set branches.
 export DEVENV_BRANCH=master
 export RASTERFORMAT_BRANCH=master
 export XSD_BRANCH=master
@@ -10,12 +9,11 @@ export PCRTREE2_BRANCH=master
 export AGUILA_BRANCH=master
 export PCRASTER_BRANCH=master
 
-buildType=$1
+# buildType=$1
+# source "$PROJECTS/PCRaster/environment/configuration/PCRaster-branch" $buildType
 
-source "$PROJECTS/PCRaster/environment/configuration/PCRaster-branch" $buildType
+_cwd_master=$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)
+source "$_cwd_master/PCRaster-branch"
+unset _cwd_master
 
-# export CDPATH=$CDPATH:$PCRaster/Sources/...
-# _baseName=`basename $PCRASTER`
 export PATH="$PCRASTER/environment/scripts:$PATH"
-
-# unset _basename

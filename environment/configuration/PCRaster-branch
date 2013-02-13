@@ -1,12 +1,7 @@
 # vim:syntax=sh
 
-buildType=$1
-
 _personalConfiguration="$PROJECTS/`ls $PROJECTS | grep -i \"^devenv$\"`/configuration/personal/kor"
-
-source "$_personalConfiguration/profiles/common" $buildType
-
-# Load project settings.
+source "$_personalConfiguration/profiles/common" $1
 source "$_personalConfiguration/profiles/DevEnv"
 source "$_personalConfiguration/profiles/RasterFormat"
 source "$_personalConfiguration/profiles/Xsd"
@@ -14,9 +9,11 @@ source "$_personalConfiguration/profiles/Dal"
 source "$_personalConfiguration/profiles/Aguila"
 source "$_personalConfiguration/profiles/PcrTree2"
 source "$_personalConfiguration/profiles/DataAssimilation"
-source "$PROJECTS/PCRaster/environment/configuration/PCRaster"
+unset _personalConfiguration
+
+_cwd_branch=$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)
+source "$_cwd_branch/PCRaster"
+unset _cwd_branch
 
 cd $PCRASTER
 setPromptForProject PCRaster $PCRSTER_BRANCH $BUILD_TYPE
-
-unset _personalConfiguration
