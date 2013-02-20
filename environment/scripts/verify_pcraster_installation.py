@@ -78,7 +78,7 @@ def verify_installation(
                 "aguila",
                 "manual",
                 "modflow"
-            ] + \
+            ]] + \
             [
                 "doc/developer/c/include/pcrcalc.h",
                 "doc/developer/c/include/pcrdll.h",
@@ -94,13 +94,10 @@ def verify_installation(
             [
                 # Needed for pcrmf2k? Check pcrtree2's CMakeLists.txt.
                 os.path.join("bin", "cygwin1.dll")
-            ] if sys.platform == "win32" + \
+            ] if sys.platform == "win32" else [] + \
             [
                 os.path.join("bin", name) for name in executable_path_names
             ] + \
-            # Not needed anymore. [
-            #     os.path.join("python", "pcraster.py")
-            # ] + \
             [os.path.join("python", "pcraster", name) for name in [
                 "__init__.py",
                 "framework/__init__.py"
