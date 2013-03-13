@@ -6,6 +6,8 @@ target_directory=$1
 sourceforge_username=$2
 pcrserver_username=$3
 
+cd $target_directory
+
 project_names="PcrTree2 DataAssimilation PCRaster"
 for project_name in $project_names; do
     project_name_lower=`awk "BEGIN { print tolower(\"$project_name\") }"`
