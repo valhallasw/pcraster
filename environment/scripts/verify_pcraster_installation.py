@@ -100,6 +100,7 @@ def verify_installation(
             ] + \
             [os.path.join("python", "pcraster", name) for name in [
                 "__init__.py",
+                "aguila.py",
                 "framework/__init__.py"
             ]] + \
             [
