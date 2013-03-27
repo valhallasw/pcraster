@@ -1,15 +1,15 @@
 # vim:syntax=sh
 
-_personalConfiguration="$PROJECTS/`ls $PROJECTS | grep -i \"^devenv$\"`/configuration/personal/kor"
-source "$_personalConfiguration/profiles/common" $1
-source "$_personalConfiguration/profiles/DevEnv"
-source "$_personalConfiguration/profiles/RasterFormat"
-source "$_personalConfiguration/profiles/Xsd"
-source "$_personalConfiguration/profiles/Dal"
-source "$_personalConfiguration/profiles/Aguila"
-source "$_personalConfiguration/profiles/PcrTree2"
-source "$_personalConfiguration/profiles/DataAssimilation"
-unset _personalConfiguration
+profiles="$PROJECTS/`ls $PROJECTS | grep -i \"^devenv$\"`/configuration/profiles"
+source "$profiles/common" $1
+source "$profiles/DevEnv"
+source "$profiles/RasterFormat"
+source "$profiles/Xsd"
+source "$profiles/Dal"
+source "$profiles/Aguila"
+source "$profiles/PcrTree2"
+source "$profiles/DataAssimilation"
+unset profiles
 
 _cwd_branch=$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)
 source "$_cwd_branch/PCRaster"
