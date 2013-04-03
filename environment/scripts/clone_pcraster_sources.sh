@@ -11,7 +11,7 @@ cd $target_directory
 project_names="PcrTree2 DataAssimilation PCRaster"
 for project_name in $project_names; do
     project_name_lower=`awk "BEGIN { print tolower(\"$project_name\") }"`
-    git clone ssh://$pcrserver_username@pcrserver.geo.uu.nl:222/home/git/$project_name $project_name_lower
+    git clone ssh://$pcrserver_username@pcrserver.geo.uu.nl:2222/home/git/$project_name $project_name_lower
 done
 
 project_names="devenv rasterformat xsd dal aguila"
