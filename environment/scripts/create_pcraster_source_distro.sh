@@ -21,3 +21,6 @@ cp $target_directory/pcraster/documentation/pcraster/changes.rst $target_directo
 
 # Zip sources.
 tar zcf $zip_name $target_directory
+
+# Clean.
+rm -fr $target_directory
