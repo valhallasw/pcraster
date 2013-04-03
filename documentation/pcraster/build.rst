@@ -53,7 +53,7 @@ Now, your environment is setup to build any of the projects that comprise PCRast
 
 .. code-block:: bash
 
-   alias PCRaster-master="source $PROJECTS/PCRaster/environment/configuration/PCRaster-master"
+   alias PCRaster-master="source $PROJECTS/pcraster/environment/configuration/PCRaster-master"
 
 Now you can just type the name of the project (CamelCased) appended by the branch name, and optionally folowed by the build type (release or debug, default is debug): ``<project_name>-<branch_name> <build_type>?``.
 

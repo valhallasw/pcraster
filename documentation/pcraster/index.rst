@@ -7,6 +7,7 @@ Contents:
    :maxdepth: 2
 
    build
+   changes
 
 ..
    Documentation items are available as PDF and/or HTML.
