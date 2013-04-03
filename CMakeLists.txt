@@ -11,3 +11,20 @@ INCLUDE(Site)
 
 ADD_CUSTOM_TARGET(tests ALL)
 ADD_SUBDIRECTORY(documentation)
+
+INSTALL(
+    FILES
+        ${PROJECT_SOURCE_DIR}/documentation/pcraster/changes.rst
+    DESTINATION
+        share/pcraster
+    RENAME
+        CHANGES.TXT
+)
+INSTALL(
+    FILES
+        $ENV{DEVENV}/documentation/licenses/pcraster.txt
+    DESTINATION
+        share/pcraster
+    RENAME
+        COPYING.TXT
+)

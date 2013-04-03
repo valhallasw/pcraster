@@ -104,7 +104,8 @@ def verify_installation(
                 "framework/__init__.py"
             ]] + \
             [
-                # "LICENSE.TXT",
+                "share/pcraster/CHANGES.TXT",
+                "share/pcraster/COPYING.TXT",
                 # TODO "lib/PCRasterModflow.xml",
                 "share/gdal/LICENSE.TXT"
             ],
