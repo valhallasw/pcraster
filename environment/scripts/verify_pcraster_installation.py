@@ -106,6 +106,7 @@ def verify_installation(
             [
                 "share/pcraster/CHANGES.TXT",
                 "share/pcraster/COPYING.TXT",
+                "share/pcraster/INSTALL.TXT",
                 # TODO "lib/PCRasterModflow.xml",
                 "share/gdal/LICENSE.TXT"
             ],
