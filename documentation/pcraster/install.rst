@@ -24,7 +24,7 @@ In order for the PCRaster executables and the Python package to be found, two en
 
 These lines can be put in $HOME/.bash_profile to have them executed each time you login.
 
-PCRaster is now installed and ready to be used.
+PCRaster is now installed and ready to be used. In case the software doesn't work, verify that the Linux Standard Base (LSB) 4 package is installed.
 
 Windows
 -------
