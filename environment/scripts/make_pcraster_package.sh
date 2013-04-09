@@ -85,6 +85,7 @@ function install_projects() {
     install_project pcrtree2
     reset_dll_path
     reset_python_path
+    install_project pcraster
     install_project data_assimilation
 }
 
