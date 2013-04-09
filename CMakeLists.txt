@@ -22,6 +22,14 @@ INSTALL(
 )
 INSTALL(
     FILES
+        ${PROJECT_SOURCE_DIR}/documentation/pcraster/install.rst
+    DESTINATION
+        share/pcraster
+    RENAME
+        INSTALL.TXT
+)
+INSTALL(
+    FILES
         $ENV{DEVENV}/documentation/licenses/pcraster.txt
     DESTINATION
         share/pcraster
