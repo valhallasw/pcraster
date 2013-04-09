@@ -34,34 +34,25 @@ def verify_installation(
 
     devenv.verify_package(prefix=prefix,
         required_root_directory_names=["bin", "doc", "lib", "python", "share"],
-        # required_file_path_names = ["INSTALL_LINUX.TXT", "LICENSE.TXT"]
-        # required_file_path_names = ["LICENSE.TXT"],
-
-
-        # LICENSE.TXT
-        # 
-        # doc/Aguila/COPYING
-        # doc/Aguila/Gpl-2.txt
-        # 
-        # doc/version.txt
-
         required_root_file_names=[],
         required_directory_path_names=[
-            # "doc/aguila"
             # "doc/demo"
-            # "doc/manual"
-            # "doc/modflow"
-            # "doc/python/pcraster"
-            # "doc/python/pcraster/framework"
             # Developer  manual  PCRasterModflow  PCRasterPython  PCRasterPythonFramework
             "bin",
             "doc",
+            "doc/aguila",
             "doc/developer",
             "doc/developer/c",
             "doc/developer/c/include",
             "doc/developer/linkout",
             "doc/developer/linkout/csharp",
             "doc/developer/xsd",
+            "doc/manual",
+            "doc/modflow",
+            "doc/python",
+            "doc/python/pcraster",
+            # TODO "doc/python/pcraster/framework",
+            # TODO "doc/python/pcraster/arrayed_variables",
             "lib",
             "python",
             "python/pcraster",
@@ -87,9 +78,10 @@ def verify_installation(
                 "doc/developer/linkout/html/index.html",
                 "doc/developer/xsd/PCRaster.xsd",
                 "doc/developer/xsd/commonTypes.xsd",
-                "doc/python/manual/index.html",
-                # "doc/python/framework/index.html"
-                # "doc/python/arrayed_variables/index.html"
+                "doc/python/pcraster/index.html",
+                # TODO Docs cannot be built when stuff isn't installed.
+                # TODO "doc/python/pcraster/arrayed_variables/index.html",
+                # TODO "doc/python/pcraster/framework/index.html"
             ] + \
             [
                 # Needed for pcrmf2k? Check pcrtree2's CMakeLists.txt.
