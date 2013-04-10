@@ -66,6 +66,7 @@ function build_projects() {
     fi
     build_project data_assimilation "
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type
+        -DPCRTREE2_ROOT=$native_build_root/pcrtree2_$build_type
     "
     if [ $os != "Cygwin" ]; then
         reset_python_path
@@ -86,12 +87,26 @@ function install_projects() {
     reset_dll_path
     reset_python_path
     install_project pcraster
+
+    configure_python_path pcrtree2
     install_project data_assimilation
+    reset_python_path
+}
+
+
+function remove_projects() {
+    remove_project devenv
+    remove_project dal
+    remove_project aguila
+    remove_project pcrtree2
+    remove_project pcraster
+    remove_project data_assimilation
 }
 
 
 build_projects
 install_projects
+remove_projects
 if [ $os == "Cygwin" ]; then
     configure_dll_path dal
     configure_dll_path pcrtree2

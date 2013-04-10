@@ -8,13 +8,12 @@ import os
 import sys
 import traceback
 import devenv
+sys.path.append(os.path.join(os.environ["AGUILA"], "environment", "scripts"))
+import verify_aguila_installation
 
 
-def verify_installation(
-        prefix):
-
-    executable_path_names=[
-        "aguila",
+executable_path_names = [
+    os.path.join("bin", name) for name in [
         "asc2map",
         "col2map",
         "legend",
@@ -27,85 +26,97 @@ def verify_installation(
         "resample",
         "table"
     ]
+]
 
-    if sys.platform == "win32":
-        executable_path_names = ["{}.exe".format(path_name) for path_name in
-            executable_path_names]
+if sys.platform == "win32":
+    executable_path_names = ["{}.exe".format(path_name) for path_name in
+        executable_path_names]
+executable_path_names += verify_aguila_installation.executable_path_names
 
+required_root_directory_names = [
+    "bin", "doc", "lib", "python", "share"
+] + verify_aguila_installation.required_root_directory_names
+
+required_root_file_names = verify_aguila_installation.required_root_file_names
+
+required_directory_path_names=[
+    # "doc/demo"
+    # Developer  manual  PCRasterModflow  PCRasterPython  PCRasterPythonFramework
+    "bin",
+    "doc",
+    "doc/developer",
+    "doc/developer/c",
+    "doc/developer/c/include",
+    "doc/developer/linkout",
+    "doc/developer/linkout/csharp",
+    "doc/developer/xsd",
+    "doc/manual",
+    "doc/modflow",
+    "doc/python",
+    "doc/python/pcraster",
+    "doc/python/pcraster/framework",
+    "doc/python/pcraster/arrayed_variables",
+    "lib",
+    "python",
+    "python/pcraster",
+    "python/pcraster/collection",
+    "python/pcraster/framework",
+    "python/pcraster/moc",
+    "python/pcraster/mldd",
+    "python/pcraster/numpy",
+    "share",
+    "share/gdal"
+] + verify_aguila_installation.required_directory_path_names
+
+required_file_path_names = \
+    [os.path.join("doc", name, "index.html") for name in [
+        "manual",
+        "modflow"
+    ]] + \
+    [
+        "doc/developer/c/include/pcrcalc.h",
+        "doc/developer/c/include/pcrdll.h",
+        # "doc/developer/linkout/deployment.txt",
+        "doc/developer/linkout/LinkOutAPIUserManual.pdf",
+        "doc/developer/linkout/html/index.html",
+        "doc/developer/xsd/PCRaster.xsd",
+        "doc/developer/xsd/commonTypes.xsd",
+        "doc/python/pcraster/index.html",
+        "doc/python/pcraster/arrayed_variables/index.html",
+        "doc/python/pcraster/framework/index.html",
+        "python/pcraster/collection/__init__.py",
+        "python/pcraster/framework/__init__.py"
+    ] + \
+    [
+        # Needed for pcrmf2k? Check pcrtree2's CMakeLists.txt.
+        os.path.join("bin", "cygwin1.dll")
+    ] if sys.platform == "win32" else [] + \
+    [
+        os.path.join("bin", name) for name in executable_path_names
+    ] + \
+    [os.path.join("python", "pcraster", name) for name in [
+        "__init__.py",
+        "aguila.py",
+        "framework/__init__.py"
+    ]] + \
+    [
+        "share/pcraster/CHANGES.TXT",
+        "share/pcraster/COPYING.TXT",
+        "share/pcraster/INSTALL.TXT",
+        # TODO "lib/PCRasterModflow.xml",
+        "share/gdal/LICENSE.TXT"
+    ] + \
+    verify_aguila_installation.required_file_path_names
+
+
+def verify_installation(
+        prefix):
     devenv.verify_package(prefix=prefix,
-        required_root_directory_names=["bin", "doc", "lib", "python", "share"],
-        required_root_file_names=[],
-        required_directory_path_names=[
-            # "doc/demo"
-            # Developer  manual  PCRasterModflow  PCRasterPython  PCRasterPythonFramework
-            "bin",
-            "doc",
-            "doc/aguila",
-            "doc/developer",
-            "doc/developer/c",
-            "doc/developer/c/include",
-            "doc/developer/linkout",
-            "doc/developer/linkout/csharp",
-            "doc/developer/xsd",
-            "doc/manual",
-            "doc/modflow",
-            "doc/python",
-            "doc/python/pcraster",
-            # TODO "doc/python/pcraster/framework",
-            # TODO "doc/python/pcraster/arrayed_variables",
-            "lib",
-            "python",
-            "python/pcraster",
-            "python/pcraster/collection",
-            "python/pcraster/framework",
-            "python/pcraster/moc",
-            "python/pcraster/mldd",
-            "python/pcraster/numpy",
-            "share",
-            "share/gdal"
-        ],
-        required_file_path_names=
-            [os.path.join("doc", name, "index.html") for name in [
-                "aguila",
-                "manual",
-                "modflow"
-            ]] + \
-            [
-                "doc/developer/c/include/pcrcalc.h",
-                "doc/developer/c/include/pcrdll.h",
-                # "doc/developer/linkout/deployment.txt",
-                "doc/developer/linkout/LinkOutAPIUserManual.pdf",
-                "doc/developer/linkout/html/index.html",
-                "doc/developer/xsd/PCRaster.xsd",
-                "doc/developer/xsd/commonTypes.xsd",
-                "doc/python/pcraster/index.html",
-                # TODO Docs cannot be built when stuff isn't installed.
-                # TODO "doc/python/pcraster/arrayed_variables/index.html",
-                # TODO "doc/python/pcraster/framework/index.html"
-            ] + \
-            [
-                # Needed for pcrmf2k? Check pcrtree2's CMakeLists.txt.
-                os.path.join("bin", "cygwin1.dll")
-            ] if sys.platform == "win32" else [] + \
-            [
-                os.path.join("bin", name) for name in executable_path_names
-            ] + \
-            [os.path.join("python", "pcraster", name) for name in [
-                "__init__.py",
-                "aguila.py",
-                "framework/__init__.py"
-            ]] + \
-            [
-                "share/pcraster/CHANGES.TXT",
-                "share/pcraster/COPYING.TXT",
-                "share/pcraster/INSTALL.TXT",
-                # TODO "lib/PCRasterModflow.xml",
-                "share/gdal/LICENSE.TXT"
-            ],
-        executable_path_names=[
-            os.path.join(prefix, "bin", name) for name in
-                executable_path_names
-            ],
+        required_root_directory_names=required_root_directory_names,
+        required_root_file_names=required_root_file_names,
+        required_directory_path_names=required_directory_path_names,
+        required_file_path_names=required_file_path_names,
+        executable_path_names=executable_path_names,
         python_package_directory_name="python",
         python_package_names=[
             "pcraster",
