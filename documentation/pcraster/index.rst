@@ -61,9 +61,3 @@ Contents:
    Developer Documentation
    
    Embedding the PCRaster ModelEngine in your own application is possible by using the LinkOut API (<a href="Developer/LinkOut/LinkOutAPIUserManual.pdf">user manual</a>, <a href="Developer/LinkOut/html/index.html">reference guide</a>).
-   
-   Note that that is a licensed feature for purchase that allows you to embed and redistribute (parts of) PCRaster. NO OTHER LICENSE, SUCH AS THE FREE WINDOWS LICENSE, ALLOWS YOU TO CALL ANY PART OF PCRASTER FROM WITHIN YOUR OWN APPLICATIONS THAT YOU REDISTIBUTE OR EXPOSE FUNCTIONALITY OF PCRASTER AS A WEB SERVICE OF ANY KIND.
-   
-   External applications
-   
-   The distribution includes gstat and gnuplot executables. Newer versions and documentation are available at the <a href="http://www.gstat.org/">gstat</a> and <a href="http://www.gnuplot.info/">gnuplot</a> websites.
