@@ -1,1 +1,2 @@
 ADD_SUBDIRECTORY(pcraster)
+ADD_SUBDIRECTORY(developer)
