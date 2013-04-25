@@ -30,6 +30,16 @@ native_path $install_prefix native_install_prefix
 native_path $external_prefix native_external_prefix
 
 
+function remove_projects() {
+    remove_project devenv
+    remove_project dal
+    remove_project aguila
+    remove_project pcrtree2
+    remove_project pcraster
+    remove_project data_assimilation
+}
+
+
 function build_projects() {
     build_project devenv ""
     build_project raster_format ""
@@ -94,19 +104,9 @@ function install_projects() {
 }
 
 
-function remove_projects() {
-    remove_project devenv
-    remove_project dal
-    remove_project aguila
-    remove_project pcrtree2
-    remove_project pcraster
-    remove_project data_assimilation
-}
-
-
+remove_projects
 build_projects
 install_projects
-remove_projects
 if [ $os == "Cygwin" ]; then
     configure_dll_path dal
     configure_dll_path pcrtree2
