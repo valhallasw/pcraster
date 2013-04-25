@@ -6,6 +6,7 @@ PCRaster 4.0.0 (in development)
 General
 ^^^^^^^
 * The installation process of PCRaster has been symplified. On all platforms we distribute a zip file which can be unzipped at a preferred location. After setting two environment variables, PCRaster is ready to be used. The goal is to make it possible to have install multiple versions of PCRaster at the same time. This has the advantage that older models can still be run with older installed versions of PCRaster. And it allows us to keep improving PCRaster, even if we brake backwards compatibility (we prefer not to, but sometimes there is a good reason).
+* Removed support for reading Hdf4 formatted rasters. Maintaining support for this format proved to be much of a hassle.
 
 PCRaster Python package
 ^^^^^^^^^^^^^^^^^^^^^^^
