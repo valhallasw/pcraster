@@ -63,7 +63,6 @@ required_directory_path_names=[
     "python/pcraster/framework",
     "python/pcraster/moc",
     "python/pcraster/mldd",
-    "python/pcraster/numpy",
     "share",
     "share/gdal"
 ] + verify_aguila_installation.required_directory_path_names
@@ -91,9 +90,7 @@ required_file_path_names = \
         # Needed for pcrmf2k? Check pcrtree2's CMakeLists.txt.
         os.path.join("bin", "cygwin1.dll")
     ] if sys.platform == "win32" else [] + \
-    [
-        os.path.join("bin", name) for name in executable_path_names
-    ] + \
+    executable_path_names + \
     [os.path.join("python", "pcraster", name) for name in [
         "__init__.py",
         "aguila.py",
@@ -124,7 +121,6 @@ def verify_installation(
             "pcraster.framework",
             "pcraster.mldd",
             "pcraster.moc",
-            "pcraster.numpy"
         ])
 
 
