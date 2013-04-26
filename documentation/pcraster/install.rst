@@ -6,7 +6,7 @@ Requirements
 The PCRaster Python package depends on Python and Numpy:
 
 * Python: Version 2.7 is required (http://www.python.org/download/).
-* Numpy: Version 1.4 or later is fine (https://sourceforge.net/projects/numpy/files/NumPy/).
+* Numpy: Version 1.6 or later is fine (https://sourceforge.net/projects/numpy/files/NumPy/).
 
 Linux
 -----
