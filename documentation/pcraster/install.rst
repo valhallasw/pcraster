@@ -1,6 +1,13 @@
 Install PCRaster
 ================
 
+Requirements
+------------
+The PCRaster Python package depends on Python and Numpy:
+
+* Python: Version 2.7 is required (http://www.python.org/download/).
+* Numpy: Version 1.4 or later is fine (https://sourceforge.net/projects/numpy/files/NumPy/).
+
 Linux
 -----
 Installing PCRaster on Linux involves these steps:
@@ -24,7 +31,11 @@ In order for the PCRaster executables and the Python package to be found, two en
 
 These lines can be put in $HOME/.bash_profile to have them executed each time you login.
 
-PCRaster is now installed and ready to be used. In case the software doesn't work, verify that the Linux Standard Base (LSB) 4 package is installed.
+PCRaster is now installed and ready to be used.
+
+.. note::
+
+   In case the software doesn't work, verify that the Linux Standard Base (LSB) 4 package is installed.
 
 Windows
 -------
