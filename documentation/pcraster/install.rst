@@ -37,6 +37,11 @@ PCRaster is now installed and ready to be used.
 
    In case the software doesn't work, verify that the Linux Standard Base (LSB) 4 package is installed.
 
+PCRaster is known to work on the folowing distributions:
+
+* Ubuntu 12.10
+* Ubuntu 12.04
+
 Windows
 -------
 TODO
