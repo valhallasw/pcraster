@@ -37,7 +37,8 @@ required_root_directory_names = [
     "bin", "doc", "lib", "python", "share"
 ] + verify_aguila_installation.required_root_directory_names
 
-required_root_file_names = verify_aguila_installation.required_root_file_names
+required_root_file_names =[
+] + verify_aguila_installation.required_root_file_names
 
 required_directory_path_names=[
     # "doc/demo"
@@ -73,6 +74,7 @@ required_file_path_names = \
         "modflow"
     ]] + \
     [
+        "bin/pcraster_modflow.xml",
         "doc/developer/c/include/pcrcalc.h",
         "doc/developer/c/include/pcrdll.h",
         # "doc/developer/linkout/deployment.txt",
@@ -100,10 +102,14 @@ required_file_path_names = \
         "share/pcraster/CHANGES.TXT",
         "share/pcraster/COPYING.TXT",
         "share/pcraster/INSTALL.TXT",
-        # TODO "lib/PCRasterModflow.xml",
         "share/gdal/LICENSE.TXT"
     ] + \
     verify_aguila_installation.required_file_path_names
+
+# TODO
+# shared_library_path_names = [
+#     "pcraster_modflow"
+# ]
 
 
 def verify_installation(
