@@ -1,20 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
-# Clone the PCRaster sources.
 target_directory=$1
-sourceforge_username=$2
-pcrserver_username=$3
+username=$2
 
 cd $target_directory
 
-project_names="PcrTree2 DataAssimilation PCRaster"
+project_names="devenv rasterformat xsd dal aguila pcrtree2 data_assimilation pcraster"
 for project_name in $project_names; do
-    project_name_lower=`awk "BEGIN { print tolower(\"$project_name\") }"`
-    git clone ssh://$pcrserver_username@pcrserver.geo.uu.nl:2222/home/git/$project_name $project_name_lower
-done
-
-project_names="devenv rasterformat xsd dal aguila"
-for project_name in $project_names; do
-    git clone ssh://$sourceforge_username@git.code.sf.net/p/pcraster/$project_name
+    git clone ssh://$username@git.code.sf.net/p/pcraster/$project_name
 done
