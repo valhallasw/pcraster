@@ -5,8 +5,9 @@ PCRaster 4.0.0 (in development)
 -------------------------------
 General
 ^^^^^^^
-* The installation process of PCRaster has been symplified. On all platforms we distribute a zip file which can be unzipped at a preferred location. After setting two environment variables, PCRaster is ready to be used. The goal is to make it possible to have install multiple versions of PCRaster at the same time. This has the advantage that older models can still be run with older installed versions of PCRaster. And it allows us to keep improving PCRaster, even if we break backwards compatibility (we prefer not to, but sometimes there is a good reason).
-* Removed support for reading HDF4 formatted rasters. Maintaining support for this format proved to be much of a hassle.
+* Changed the license of all PCRaster source code to the `GPLv3 <http://www.gnu.org/licenses/gpl-3.0.html>`_ open source license. Moved all sourcecode to the `PCRaster Open Source Tools site <https://sourceforge.net/projects/pcraster/>`_ at SourceForge.
+* The installation process of PCRaster has been symplified. On all platforms we distribute a zip file which can be unzipped at a preferred location. After setting two environment variables, PCRaster is ready to be used. The goal is to make it possible to install multiple versions of PCRaster at the same time. This has the advantage that older models can still be run with older installed versions of PCRaster. And it allows us to keep improving PCRaster, even if we break backwards compatibility (we prefer not to, but sometimes there is a good reason).
+* Removed support for reading HDF4 formatted rasters. Maintaining support for this format proved to be too much of a hassle.
 
 pcrcalc
 ^^^^^^^
