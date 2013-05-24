@@ -18,7 +18,7 @@ xsd_sources="$XSD"
 dal_sources="$DAL"
 aguila_sources="$AGUILA"
 pcrtree2_sources="$PCRTREE2"
-data_assimilation_sources="$DATAASSIMILATION"
+data_assimilation_sources="$DATA_ASSIMILATION"
 pcraster_sources="$PCRASTER"
 
 external_prefix="$PCRTEAM_EXTERN"
