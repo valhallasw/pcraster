@@ -30,27 +30,24 @@ native_path $install_prefix native_install_prefix
 native_path $external_prefix native_external_prefix
 
 
-function remove_projects() {
-    remove_project devenv
-    remove_project dal
-    remove_project aguila
-    remove_project pcrtree2
-    remove_project pcraster
-    remove_project data_assimilation
+function build_or_rebuild_project() {
+    # Call build_project only when debugging.
+    rebuild_project $*  # *Always* commit with this line uncommented!
+    # build_project $*  # *Never* commit with this line uncommented!
 }
 
 
 function build_projects() {
-    build_project devenv ""
-    build_project raster_format ""
-    build_project xsd "
+    build_or_rebuild_project devenv ""
+    build_or_rebuild_project raster_format ""
+    build_or_rebuild_project xsd "
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type
     "
-    build_project dal "
+    build_or_rebuild_project dal "
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type
         -DRASTERFORMAT_ROOT=$native_build_root/raster_format_$build_type
     "
-    build_project aguila "
+    build_or_rebuild_project aguila "
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type
         -DXSD_ROOT=$native_build_root/xsd_$build_type
         -DDAL_ROOT=$native_build_root/dal_$build_type
@@ -60,7 +57,7 @@ function build_projects() {
         configure_dll_path pcrtree2
         configure_python_path pcrtree2
     fi
-    build_project pcrtree2 "
+    build_or_rebuild_project pcrtree2 "
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type
         -DXSD_ROOT=$native_build_root/xsd_$build_type
         -DDAL_ROOT=$native_build_root/dal_$build_type
@@ -74,14 +71,14 @@ function build_projects() {
     if [ $os != "Cygwin" ]; then
         configure_python_path pcrtree2
     fi
-    build_project data_assimilation "
+    build_or_rebuild_project data_assimilation "
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type
         -DPCRTREE2_ROOT=$native_build_root/pcrtree2_$build_type
     "
     if [ $os != "Cygwin" ]; then
         reset_python_path
     fi
-    build_project pcraster ""
+    build_or_rebuild_project pcraster ""
 }
 
 
@@ -104,7 +101,6 @@ function install_projects() {
 }
 
 
-remove_projects
 build_projects
 install_projects
 if [ $os == "Cygwin" ]; then
@@ -116,3 +112,17 @@ if [ $os == "Cygwin" ] ;then
     reset_dll_path
 fi
 verify_pcraster_installation.py $native_install_prefix
+
+
+base_name=`basename $install_prefix`
+if [ $os == "Cygwin" ]; then
+    zip_name=$base_name.zip
+    zip -q -r $zip_name $install_prefix
+else
+    zip_name=$base_name.tar.gz
+    tar zcf $zip_name $install_prefix
+fi
+
+rm -fr $install_prefix
+echo $zip_name
+ls -lh $zip_name
