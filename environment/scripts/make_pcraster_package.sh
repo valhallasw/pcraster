@@ -32,8 +32,8 @@ native_path $external_prefix native_external_prefix
 
 function build_or_rebuild_project() {
     # Call build_project only when debugging.
-    rebuild_project $*  # *Always* commit with this line uncommented!
-    # build_project $*  # *Never* commit with this line uncommented!
+    rebuild_project $@  # *Always* commit with this line uncommented!
+    # build_project $@  # *Never* commit with this line uncommented!
 }
 
 
