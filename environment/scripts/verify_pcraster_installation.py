@@ -8,7 +8,8 @@ import os
 import sys
 import traceback
 import devenv
-sys.path.append(os.path.join(os.environ["AGUILA"], "environment", "scripts"))
+sys.path.append(os.path.join(devenv.native_path_name(os.environ["AGUILA"]),
+    "environment", "scripts"))
 import verify_aguila_installation
 
 

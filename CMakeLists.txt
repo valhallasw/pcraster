@@ -30,7 +30,7 @@ INSTALL(
 )
 INSTALL(
     FILES
-        $ENV{DEVENV}/documentation/licenses/pcraster.txt
+        ${DEVENV}/documentation/licenses/pcraster.txt
     DESTINATION
         share/pcraster
     RENAME
