@@ -23,6 +23,10 @@ pcraster_sources="$PCRASTER"
 
 external_prefix="$PCRTEAM_EXTERN"
 
+# Make sure we don't use lingering stuff by accident.
+# TODO
+# unset OBJECTS
+
 source $DEVENV/scripts/make_package.sh
 
 native_path $build_root native_build_root
@@ -31,9 +35,10 @@ native_path $external_prefix native_external_prefix
 
 
 function build_or_rebuild_project() {
+    echo $1, $2
     # Call build_project only when debugging.
-    rebuild_project $@  # *Always* commit with this line uncommented!
-    # build_project $@  # *Never* commit with this line uncommented!
+    rebuild_project "$@"  # *Always* commit with this line uncommented!
+    # build_project "$@"  # *Never* commit with this line uncommented!
 }
 
 
