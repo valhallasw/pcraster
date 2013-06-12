@@ -16,6 +16,7 @@ pcrcalc
 
 PCRaster Python package
 ^^^^^^^^^^^^^^^^^^^^^^^
+* Updated the code to allow the garbage collector to reclaim memory used by some of the framework class instanceѕ, after the last reference goes out of scope.
 * Updated the code to prevent that the memory used by the PCRaster Python extension increases during a model run.
 * PCRaster Python package now depends on Python 2.7.
 * PCRaster Python package uses lower case names for package names. Update all PCRaster related imports and change them to lower case. See also the `Style Guide for Python Code <http://www.python.org/dev/peps/pep-0008/>`_.
