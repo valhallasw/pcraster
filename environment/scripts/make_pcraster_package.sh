@@ -119,15 +119,17 @@ fi
 verify_pcraster_installation.py $native_install_prefix
 
 
-base_name=`basename $install_prefix`
+install_base_name=`basename $install_prefix`
+install_dir_name=`dirname $install_prefix`
+cd $install_dir_name
 if [ $os == "Cygwin" ]; then
-    zip_name=$base_name.zip
-    zip -q -r $zip_name $install_prefix
+    install_zip_name=$install_base_name.zip
+    zip -q -r $install_zip_name $install_base_name
 else
-    zip_name=$base_name.tar.gz
-    tar zcf $zip_name $install_prefix
+    install_zip_name=$install_base_name.tar.gz
+    tar zcf $install_zip_name $install_base_name
 fi
 
-rm -fr $install_prefix
-echo $zip_name
-ls -lh $zip_name
+rm -fr $install_base_name
+echo $install_dir_name/$install_zip_name
+ls -lh $install_zip_name
