@@ -1,5 +1,5 @@
 # vim:syntax=sh
-profiles="$PROJECTS/`ls $PROJECTS | grep -i \"^devenv$\"`/configuration/profiles"
+profiles="$PROJECTS/`\ls $PROJECTS | \grep -i \"^devenv$\"`/configuration/profiles"
 source "$profiles/common" $1
 source "$profiles/DevEnv"
 source "$profiles/RasterFormat"
