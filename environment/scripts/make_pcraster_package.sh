@@ -35,7 +35,6 @@ native_path $external_prefix native_external_prefix
 
 
 function build_or_rebuild_project() {
-    echo $1, $2
     # Call build_project only when debugging.
     rebuild_project "$@"  # *Always* commit with this line uncommented!
     # build_project "$@"  # *Never* commit with this line uncommented!
@@ -106,6 +105,27 @@ function install_projects() {
 }
 
 
+function make_package() {
+    local install_prefix=$1
+    local install_base_name=`basename $install_prefix`
+    local install_dir_name=`dirname $install_prefix`
+
+    cd $install_dir_name
+
+    if [ $os == "Cygwin" ]; then
+        install_zip_name=$install_base_name.zip
+        zip -q -r $install_zip_name $install_base_name
+    else
+        install_zip_name=$install_base_name.tar.gz
+        tar zcf $install_zip_name $install_base_name
+    fi
+
+    rm -fr $install_base_name
+
+    native_path $install_dir_name/$install_zip_name $2
+}
+
+
 build_projects
 install_projects
 if [ $os == "Cygwin" ]; then
@@ -116,20 +136,6 @@ fixup.py $native_install_prefix $native_external_prefix
 if [ $os == "Cygwin" ] ;then
     reset_dll_path
 fi
-verify_pcraster_installation.py $native_install_prefix
-
-
-install_base_name=`basename $install_prefix`
-install_dir_name=`dirname $install_prefix`
-cd $install_dir_name
-if [ $os == "Cygwin" ]; then
-    install_zip_name=$install_base_name.zip
-    zip -q -r $install_zip_name $install_base_name
-else
-    install_zip_name=$install_base_name.tar.gz
-    tar zcf $install_zip_name $install_base_name
-fi
-
-rm -fr $install_base_name
-echo $install_dir_name/$install_zip_name
-ls -lh $install_zip_name
+verify_pcraster_installation.py $install_prefix
+make_package $install_prefix install_zip_path_name
+ls -lh $install_zip_path_name
