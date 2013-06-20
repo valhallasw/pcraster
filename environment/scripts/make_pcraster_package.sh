@@ -136,6 +136,6 @@ fixup.py $native_install_prefix $native_external_prefix
 if [ $os == "Cygwin" ] ;then
     reset_dll_path
 fi
-verify_pcraster_installation.py $install_prefix
+verify_pcraster_installation.py $native_install_prefix
 make_package $install_prefix install_zip_path_name
 ls -lh $install_zip_path_name
