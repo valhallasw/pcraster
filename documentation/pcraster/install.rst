@@ -44,7 +44,20 @@ PCRaster is known to work on the folowing distributions:
 
 Windows
 -------
-TODO
+Installing PCRaster on Windows involves these steps:
+
+* Unzip the zip file containing the software
+* Configure two environment variables so the PCRaster executables and PCRaster Python package are found.
+
+PCRaster can be installed anywhere you want.
+
+In order for the PCRaster executables and the Python package to be found, two environment variables must be updated with the paths to the executables and Python package, respectively.
+
+
+TODO: How to set variables on Windows. Link to webpage explaining that for different versions of Windos.
+
+
+PCRaster is now installed and ready to be used.
 
 Mac OS X
 --------
