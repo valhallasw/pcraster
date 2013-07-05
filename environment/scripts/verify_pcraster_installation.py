@@ -130,6 +130,8 @@ def verify_installation(
             "pcraster.moc",
         ])
 
+    # TODO On Windows, make sure import libs are not installed.
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=
