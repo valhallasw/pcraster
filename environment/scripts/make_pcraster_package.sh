@@ -3,6 +3,10 @@ set -e
 
 if [ $# != 2 ]; then
     echo "Not enough arguments"
+    echo "`basename $0` <pcrteam_extern> <project_root>"
+    echo ""
+    echo "pcrteam_extern  Path to root of external stuff."
+    echo "project_root    Path to root of devenv projects."
     exit 1
 fi
 
@@ -66,9 +70,10 @@ function build_or_rebuild_project() {
     # Call build_project only when debugging.
     local project_name=$1
     local generator=$2
-    local cmake_options=$3
-    rebuild_project $project_name "$generator" "$cmake_options"  # *Always* commit without this line!
-    # build_project $project_name "$generator" "$cmake_options"  # *Never* commit with this line!
+    shift 2
+    local cmake_options=$*
+    rebuild_project $project_name "$generator" $cmake_options  # *Always* commit without this line!
+    # build_project $project_name "$generator" $cmake_options  # *Never* commit with this line!
 }
 
 
@@ -77,29 +82,25 @@ function build_projects() {
 
     build_or_rebuild_project devenv "$generator" ""
     build_or_rebuild_project rasterformat "$generator" ""
-    build_or_rebuild_project xsd "$generator" "
+    build_or_rebuild_project xsd "$generator" \
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type
-    "
-    build_or_rebuild_project dal "$generator" "
-        -DDEVENV_ROOT=$native_build_root/devenv_$build_type
+    build_or_rebuild_project dal "$generator" \
+        -DDEVENV_ROOT=$native_build_root/devenv_$build_type \
         -DRASTERFORMAT_ROOT=$native_build_root/rasterformat_$build_type
-    "
-    build_or_rebuild_project aguila "$generator" "
-        -DDEVENV_ROOT=$native_build_root/devenv_$build_type
-        -DXSD_ROOT=$native_build_root/xsd_$build_type
+    build_or_rebuild_project aguila "$generator" \
+        -DDEVENV_ROOT=$native_build_root/devenv_$build_type \
+        -DXSD_ROOT=$native_build_root/xsd_$build_type \
         -DDAL_ROOT=$native_build_root/dal_$build_type
-    "
 
     if [ $os != "Cygwin" ]; then
         configure_dll_path pcrtree2
         configure_python_path pcrtree2
     fi
-    build_or_rebuild_project pcrtree2 "$generator" "
-        -DDEVENV_ROOT=$native_build_root/devenv_$build_type
-        -DXSD_ROOT=$native_build_root/xsd_$build_type
-        -DDAL_ROOT=$native_build_root/dal_$build_type
+    build_or_rebuild_project pcrtree2 "$generator" \
+        -DDEVENV_ROOT=$native_build_root/devenv_$build_type \
+        -DXSD_ROOT=$native_build_root/xsd_$build_type \
+        -DDAL_ROOT=$native_build_root/dal_$build_type \
         -DRASTERFORMAT_ROOT=$native_build_root/rasterformat_$build_type
-    "
     if [ $os != "Cygwin" ]; then
         reset_dll_path
         reset_python_path
@@ -108,13 +109,13 @@ function build_projects() {
     if [ $os != "Cygwin" ]; then
         configure_python_path pcrtree2
     fi
-    build_or_rebuild_project data_assimilation "$generator" "
-        -DDEVENV_ROOT=$native_build_root/devenv_$build_type
+    build_or_rebuild_project data_assimilation "$generator" \
+        -DDEVENV_ROOT=$native_build_root/devenv_$build_type \
         -DPCRTREE2_ROOT=$native_build_root/pcrtree2_$build_type
-    "
     if [ $os != "Cygwin" ]; then
         reset_python_path
     fi
+
     build_or_rebuild_project pcraster "$generator" ""
 }
 
