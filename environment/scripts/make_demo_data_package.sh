@@ -29,5 +29,4 @@ package_filename=$target_directory_basename.tar.gz
 cd ..
 tar zcf $package_filename $target_directory_basename
 rm -fr $target_directory_basename
-pwd
-ls -hl $package_filename
+ls -hl `pwd`/$package_filename
