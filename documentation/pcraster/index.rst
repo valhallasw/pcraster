@@ -4,10 +4,11 @@ Welcome to PCRaster's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   build
    install
+   build
+   develop
    changes
 
 ..
