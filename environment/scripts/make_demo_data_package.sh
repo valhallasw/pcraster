@@ -48,5 +48,4 @@ else
 fi
 
 rm -fr $target_directory_basename
-pwd
-ls -hl $package_filename
+ls -hl `pwd`/$package_filename
