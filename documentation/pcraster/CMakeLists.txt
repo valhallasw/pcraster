@@ -1,6 +1,7 @@
 SET(SPHINX_SOURCES
     build.rst
     changes.rst
+    develop.rst
     index.rst
     install.rst
 )
