@@ -36,7 +36,12 @@ path_name_to_project $project_root data_assimilation data_assimilation_sources
 path_name_to_project $project_root pcraster pcraster_sources
 
 
-source $devenv_sources/configuration/profiles/Utils.sh
+source $devenv_sources/scripts/make_package.sh
+# source $devenv_sources/configuration/profiles/Utils.sh
+
+native_path $devenv_sources native_devenv_sources
+
+export CMAKE_MODULE_PATH="$native_devenv_sources/templates/cmake;$CMAKE_MODULE_PATH"
 
 determine_platform compiler_ architecture_ address_model_
 platform_as_string platform
@@ -49,9 +54,6 @@ base_name="pcraster-${platform}-$date"
 install_prefix=`pwd`/$base_name
 
 unset platform
-
-
-source $devenv_sources/scripts/make_package.sh
 
 
 external_prefix="$pcrteam_extern"
@@ -172,7 +174,6 @@ fi
 
 _cwd=$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)
 native_path $_cwd _native_cwd
-native_path $devenv_sources native_devenv_sources
 
 
 build_projects "$generator"
