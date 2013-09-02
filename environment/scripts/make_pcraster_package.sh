@@ -55,6 +55,7 @@ source $devenv_sources/scripts/make_package.sh
 
 
 external_prefix="$pcrteam_extern"
+external_platform_prefix=$external_prefix/$platform
 
 
 cmake="cmake"
@@ -165,7 +166,7 @@ if [ $OSTYPE == "linux_gnu" ]; then
         export LSBCC_SHAREDLIBS=gdal
     fi
 
-    export LD_LIBRARY_PATH="$PYTHON_ROOT/lib"
+    export LD_LIBRARY_PATH="$external_platform_prefix/python-*/lib"
 fi
 
 
