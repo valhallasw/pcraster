@@ -47,8 +47,14 @@ determine_platform compiler_ architecture_ address_model_
 platform_as_string platform
 
 build_type="Release"
-date=`date +%Y%m%d`
-base_name="pcraster-${platform}-$date"
+
+major_version="4"
+minor_version="0"
+patch_version="0"
+version="$major_version.$minor_version.$patch_version"
+pre_release_version="-beta"  # Optional.
+build_metadata="-`date +%Y%m%d`"  # Optional.
+base_name="pcraster-${version}-${platform}${pre_release_version}${build_metadata}"
 
 # Where to install targets.
 install_prefix=`pwd`/$base_name
