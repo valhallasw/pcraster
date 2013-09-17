@@ -58,6 +58,7 @@ required_directory_path_names=[
     "doc/python/pcraster",
     "doc/python/pcraster/framework",
     "doc/python/pcraster/arrayed_variables",
+    "doc/pcraster",
     "lib",
     "python",
     "python/pcraster",
