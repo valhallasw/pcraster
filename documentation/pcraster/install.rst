@@ -43,7 +43,11 @@ PCRaster is known to work on the folowing distributions:
 
 * Ubuntu 12.10
 * Ubuntu 12.04
+* bullx Linux, which is compatible with Red Hat Enterprise Linux
 
+PCRaster is known to work on the Dutch national supercomputer, `Cartesius`_.
+
+.. _Cartesius: https://www.surfsara.nl/systems/cartesius
 
 Windows
 -------
