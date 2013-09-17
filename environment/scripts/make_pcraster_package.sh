@@ -37,66 +37,52 @@ path_name_to_project $project_root pcraster pcraster_sources
 
 
 source $devenv_sources/scripts/make_package.sh
-# source $devenv_sources/configuration/profiles/Utils.sh
 
 native_path $devenv_sources native_devenv_sources
 
 export CMAKE_MODULE_PATH="$native_devenv_sources/templates/cmake;$CMAKE_MODULE_PATH"
 
-determine_platform compiler_ architecture_ address_model_
-platform_as_string platform
+# determine_platform compiler_ architecture_ address_model_
+# platform_as_string platform
+# external_platform_prefix=$external_prefix/$platform
+# unset platform
 
 build_type="Release"
-
-major_version="4"
-minor_version="0"
-patch_version="0"
-version="$major_version.$minor_version.$patch_version"
-pre_release_version="-beta"  # Optional.
-build_metadata="-`date +%Y%m%d`"  # Optional.
-base_name="pcraster-${version}-${platform}${pre_release_version}${build_metadata}"
-
-# Where to install targets.
-install_prefix=`pwd`/$base_name
-
-unset platform
-
-
 external_prefix="$pcrteam_extern"
-external_platform_prefix=$external_prefix/$platform
-
 
 cmake="cmake"
 cmake_generator generator
-
-
 native_path $build_root native_build_root
-native_path $install_prefix native_install_prefix
 native_path $external_prefix native_external_prefix
 
 
 function build_or_rebuild_project() {
-    # Call build_project only when debugging.
     local project_name=$1
-    local generator=$2
-    shift 2
+    local install_prefix=$2
+    local generator=$3
+    shift 3
     local cmake_options=$*
-    rebuild_project $project_name "$generator" $cmake_options  # *Always* commit without this line!
-    # build_project $project_name "$generator" $cmake_options  # *Never* commit with this line!
+
+    # *ALWAYS* commit with this line uncommented!!!
+    rebuild_project $project_name "$install_prefix" "$generator" $cmake_options
+
+    # *NEVER* commit with this line uncommented!!!
+    # build_project $project_name "$install_prefix" "$generator" $cmake_options
 }
 
 
 function build_projects() {
-    local generator=$1
+    local install_prefix=$1
+    local generator=$2
 
-    build_or_rebuild_project devenv "$generator" ""
-    build_or_rebuild_project rasterformat "$generator" ""
-    build_or_rebuild_project xsd "$generator" \
+    build_or_rebuild_project devenv "$install_prefix" "$generator" ""
+    build_or_rebuild_project rasterformat "$install_prefix" "$generator" ""
+    build_or_rebuild_project xsd "$install_prefix" "$generator" \
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type
-    build_or_rebuild_project dal "$generator" \
+    build_or_rebuild_project dal "$install_prefix" "$generator" \
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type \
         -DRASTERFORMAT_ROOT=$native_build_root/rasterformat_$build_type
-    build_or_rebuild_project aguila "$generator" \
+    build_or_rebuild_project aguila "$install_prefix" "$generator" \
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type \
         -DXSD_ROOT=$native_build_root/xsd_$build_type \
         -DDAL_ROOT=$native_build_root/dal_$build_type
@@ -105,7 +91,7 @@ function build_projects() {
         configure_dll_path pcrtree2
         configure_python_path pcrtree2
     fi
-    build_or_rebuild_project pcrtree2 "$generator" \
+    build_or_rebuild_project pcrtree2 "$install_prefix" "$generator" \
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type \
         -DXSD_ROOT=$native_build_root/xsd_$build_type \
         -DDAL_ROOT=$native_build_root/dal_$build_type \
@@ -118,18 +104,20 @@ function build_projects() {
     if [ $os != "Cygwin" ]; then
         configure_python_path pcrtree2
     fi
-    build_or_rebuild_project data_assimilation "$generator" \
+    build_or_rebuild_project data_assimilation "$install_prefix" "$generator" \
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type \
         -DPCRTREE2_ROOT=$native_build_root/pcrtree2_$build_type
     if [ $os != "Cygwin" ]; then
         reset_python_path
     fi
 
-    build_or_rebuild_project pcraster "$generator" ""
+    build_or_rebuild_project pcraster "$install_prefix" "$generator" ""
 }
 
 
 function install_projects() {
+    local install_prefix=$1
+
     rm -fr $install_prefix
 
     install_project devenv
@@ -150,22 +138,24 @@ function install_projects() {
 
 function make_package() {
     local install_prefix=$1
-    local install_base_name=`basename $install_prefix`
+    local install_basename=`basename $install_prefix`
     local install_dir_name=`dirname $install_prefix`
 
     cd $install_dir_name
 
     if [ $os == "Cygwin" ]; then
-        install_zip_name=$install_base_name.zip
-        zip -q -r $install_zip_name $install_base_name
+        install_zip_name=$install_basename.zip
+        zip -q -r $install_zip_name $install_basename
     else
-        install_zip_name=$install_base_name.tar.gz
-        tar zcf $install_zip_name $install_base_name
+        install_zip_name=$install_basename.tar.gz
+        tar zcf $install_zip_name $install_basename
     fi
 
-    rm -fr $install_base_name
+    rm -fr $install_basename
 
     native_path $install_dir_name/$install_zip_name $2
+
+    cd -
 }
 
 
@@ -174,16 +164,24 @@ if [ $OSTYPE == "linux_gnu" ]; then
         export LSBCC_SHAREDLIBS=gdal
     fi
 
-    export LD_LIBRARY_PATH="$external_platform_prefix/python-*/lib"
+    # export LD_LIBRARY_PATH="$external_platform_prefix/python-*/lib"
 fi
 
 
-_cwd=$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)
-native_path $_cwd _native_cwd
+cd $build_root
 
+# Determine name of install directory, package file, etc. Grep this information
+# from the generated CMakeCache.txt. Otherwise we have to duplicate the
+# string formatting logic here.
+# Generate PCRaster's CMakeCache.txt by configuring the project.
+configure_project pcraster "whatever" "$generator" ""
+basename=`grep BASENAME pcraster_$build_type/CMakeCache.txt | python -c "import sys; lines = sys.stdin.readlines(); assert(len(lines) == 1); print lines[0].strip().split(\"=\")[1]"`
+install_prefix=`pwd`/$basename
+native_path $install_prefix native_install_prefix
 
-build_projects "$generator"
-install_projects
+build_projects "$install_prefix" "$generator"
+
+install_projects $install_prefix
 if [ $os == "Cygwin" ]; then
     configure_dll_path dal
     configure_dll_path pcrtree2
@@ -199,9 +197,9 @@ fi
 export AGUILA=$aguila_sources
 export PCRTEAM_EXTERN=$pcrteam_extern
 export PYTHONPATH="$native_devenv_sources/sources;$PYTHONPATH"
+_cwd=$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd)
+native_path $_cwd _native_cwd
 python $_native_cwd/verify_pcraster_installation.py $native_install_prefix
 
 make_package $install_prefix install_zip_path_name
 ls -lh $install_zip_path_name
-
-unset _cwd
