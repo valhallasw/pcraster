@@ -174,8 +174,9 @@ cd $build_root
 # from the generated CMakeCache.txt. Otherwise we have to duplicate the
 # string formatting logic here.
 # Generate PCRaster's CMakeCache.txt by configuring the project.
+remove_project "pcraster"
 configure_project pcraster "whatever" "$generator" ""
-basename=`grep BASENAME pcraster_$build_type/CMakeCache.txt | python -c "import sys; lines = sys.stdin.readlines(); assert(len(lines) == 1); print lines[0].strip().split(\"=\")[1]"`
+basename=`grep BASENAME pcraster_$build_type/CMakeCache.txt | python -c "import sys; lines = sys.stdin.readlines(); assert(len(lines) == 1); sys.stdout.write(lines[0].strip().split(\"=\")[1])"`
 install_prefix=`pwd`/$basename
 native_path $install_prefix native_install_prefix
 
