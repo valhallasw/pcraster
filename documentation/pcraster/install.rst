@@ -72,6 +72,24 @@ On Windows XP environment variables can be changed like this (http://support.mic
 
 On other versions of Windows a similar procedure must be folowed.
 
+An alternative is to create a batch script that can be run before using PCRaster:
+
+.. code-block:: bat
+
+   rem Configure environment for use of Python.
+   set python_root=C:\Python27
+   set PATH=%python_root%;%PATH%
+   set python_root=
+
+   rem Configure environment for use of PCRaster.
+   rem This variable is different for each version of PCRaster.
+   set pcraster_version=pcraster-4.0.0-beta-20130917_x86-32_msvs-9
+   set pcraster_root=%HOMEPATH%\Desktop\%pcraster_version%
+   set PATH=%pcraster_root%\bin;%PATH%
+   set PYTHONPATH=%pcraster_root%\python;%PYTHONPATH%
+   set pcraster_root=
+   set pcraster_version=
+
 PCRaster is now installed and ready to be used.
 
 .. note::
