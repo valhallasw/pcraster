@@ -23,6 +23,7 @@ PCRaster Python package
 * Removed ``pcraster.numpy`` sub-package. Numpy functionality is merged in the ``pcraster`` main package and available without an explicit import of the ``numpy`` sub-package. Remove any import of ``pcraster.numpy`` and rename any calls of ``pcraster.numpy.pcr2numpy`` and ``pcraster.numpy.numpy2pcr`` to ``pcraster.pcr2numpy`` and ``pcraster.numpy2pcr``.
 * Removed ``pcr2numarray`` and ``numarray2pcr`` which were already deprecated. Use ``pcr2numpy`` and ``numpy2pcr``.
 * Reimplemented ``numpy2pcr``. It is faster now.
+* Added a `setclone` overload taking `nrRows`, `nrCols`, `cellSize`, `west`, `north`. No need to pass the name of an existing raster anymore.
 
 MODFLOW extension
 ^^^^^^^^^^^^^^^^^
