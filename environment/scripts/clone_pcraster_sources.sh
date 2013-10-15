@@ -2,7 +2,7 @@
 set -e
 set -x
 
-if [ $# != 1 ] || [$# != 2]; then
+if [ $# != 1 ] && [ $# != 2 ]; then
     echo "Wrong number of arguments"
     echo "`basename $0` <target_directory> [username]"
     echo ""

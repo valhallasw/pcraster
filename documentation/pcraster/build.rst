@@ -3,7 +3,7 @@ Build PCRaster
 
 .. note::
 
-   Building PCRaster yourselve is something you want to prevend. It may take a lot of time and you may end up being frustrated. Are you sure you want to proceed? Is it really necessary?
+   Building PCRaster yourself is something you want to prevent. It may take a lot of time and you may end up being frustrated. Are you sure you want to proceed? Is it really necessary?
 
 The PCRaster software depends on many other software. For example, Qt is used in the implementation of GUI components, and GDAL is used to read various raster formats. Before being able to build PCRaster, these 3rd party software sources must be downloaded and built. After that, the PCRaster sources can be downloaded and built.
 
@@ -71,7 +71,7 @@ Now, your environment is setup to build any of the projects that comprise PCRast
 
    alias PCRaster-master="source $PROJECTS/pcraster/environment/configuration/PCRaster-master"
 
-Now you can just type the name of the project (CamelCased) appended by the branch name, and optionally folowed by the build type (release or debug, default is debug): ``<project_name>-<branch_name> [build_type]``.
+Now you can just type the name of the project (CamelCased) appended by the branch name, and optionally followed by the build type (release or debug, default is debug): ``<project_name>-<branch_name> [build_type]``.
 
 To build everything, choose the ``PCRaster`` project. If you need to set ``CC``/``CXX`` explicitly, then do that *before* configuring the environment for the project.
 
