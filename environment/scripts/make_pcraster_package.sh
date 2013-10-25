@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
+
 if [ $# != 2 ]; then
     echo "Not enough arguments"
     echo "`basename $0` <pcrteam_extern> <project_root>"
@@ -9,6 +10,7 @@ if [ $# != 2 ]; then
     echo "project_root    Path to root of devenv projects."
     exit 1
 fi
+
 
 # Where to find external stuff.
 pcrteam_extern=$1
@@ -87,7 +89,12 @@ function build_projects() {
         -DXSD_ROOT=$native_build_root/xsd_$build_type \
         -DDAL_ROOT=$native_build_root/dal_$build_type
 
-    if [ $os != "Cygwin" ]; then
+    if [ $os == "GNU/Linux" ]; then
+        configure_dll_path dal
+        configure_dll_path pcrtree2
+        configure_python_path pcrtree2
+    elif [ $os == "Cygwin" ]; then
+        configure_dll_path dal
         configure_dll_path pcrtree2
         configure_python_path pcrtree2
     fi
@@ -96,18 +103,24 @@ function build_projects() {
         -DXSD_ROOT=$native_build_root/xsd_$build_type \
         -DDAL_ROOT=$native_build_root/dal_$build_type \
         -DRASTERFORMAT_ROOT=$native_build_root/rasterformat_$build_type
-    if [ $os != "Cygwin" ]; then
+    if [ $os == "GNU/Linux" ]; then
+        reset_dll_path
+        reset_python_path
+    elif [ $os == "Cygwin" ]; then
         reset_dll_path
         reset_python_path
     fi
 
-    if [ $os != "Cygwin" ]; then
+    if [ $os == "Cygwin" ] || [ $os == "GNU/Linux" ]; then
+        configure_dll_path dal
+        configure_dll_path pcrtree2
         configure_python_path pcrtree2
     fi
     build_or_rebuild_project data_assimilation "$install_prefix" "$generator" \
         -DDEVENV_ROOT=$native_build_root/devenv_$build_type \
         -DPCRTREE2_ROOT=$native_build_root/pcrtree2_$build_type
-    if [ $os != "Cygwin" ]; then
+    if [ $os == "Cygwin" ] || [ $os == "GNU/Linux" ]; then
+        reset_dll_path
         reset_python_path
     fi
 
@@ -123,16 +136,22 @@ function install_projects() {
     install_project devenv
     install_project dal
     install_project aguila
+
+    configure_dll_path dal
     configure_dll_path pcrtree2
     configure_python_path pcrtree2
     install_project pcrtree2
     reset_dll_path
     reset_python_path
-    install_project pcraster
 
+    configure_dll_path dal
+    configure_dll_path pcrtree2
     configure_python_path pcrtree2
     install_project data_assimilation
+    reset_dll_path
     reset_python_path
+
+    install_project pcraster
 }
 
 
