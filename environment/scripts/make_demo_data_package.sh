@@ -29,10 +29,17 @@ mkdir -p workspace/modflow
 cp $PCRTREE2/sources/modflow/demo/* workspace/modflow
 
 # Examples.
-mkdir -p example/{vector,muskingum}
-cp $PCRTREE2/data/samples/vector/* example/vector
+mkdir -p example/aguila
+cp -r $AGUILA/data/demos/* example/aguila
+
+mkdir -p example/muskingum
 cp -r $PCRTREE2/data/samples/muskingum/* example/muskingum
 
+mkdir -p example/python_framework
+cp -r $DATA_ASSIMILATION/data/demo/* example/python_framework
+
+mkdir -p example/vector
+cp $PCRTREE2/data/samples/vector/* example/vector
 
 cd ..
 
