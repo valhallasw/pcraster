@@ -1,8 +1,8 @@
 Changes
 =======
 
-PCRaster 4.0.0 (in development)
--------------------------------
+PCRaster 4.0.0
+--------------
 General
 ^^^^^^^
 * Changed the license of all PCRaster source code to the `GPLv3 <http://www.gnu.org/licenses/gpl-3.0.html>`_ open source license. Moved all sourcecode to the `PCRaster Open Source Tools site <https://sourceforge.net/projects/pcraster/>`_ at SourceForge.
