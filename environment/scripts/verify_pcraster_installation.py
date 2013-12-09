@@ -134,6 +134,13 @@ def verify_installation(
     # TODO On Windows, make sure import libs are not installed.
 
 
+    # TODO Add support for verifying snippets:
+    #   # Failed on Linux because we used to ship libz.
+    #   from pcraster import *
+    #   import matplotlib.pyplot as plt
+    #   plt.figure().savefig("test.pdf", format="pdf")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=
         "Verify that an installation is likely to be correct")
