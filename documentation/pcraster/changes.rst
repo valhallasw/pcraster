@@ -1,6 +1,24 @@
 Changes
 =======
 
+PCRaster 4.0.1
+--------------
+This is a bug fix release for 4.0.
+
+.. General
+.. ^^^^^^^
+.. * The documentation of PCRaster operations was updated
+
+resample
+^^^^^^^^
+* Fixed a regression that caused the generation of MV in all cells while using the crop option (`Ticket #485 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/485/>`_)
+
+PCRaster Python package
+^^^^^^^^^^^^^^^^^^^^^^^
+* Fixed a wrong number of arguments in the base class for dynamic models (`Ticket #603 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/603/>`_)
+
+
+
 PCRaster 4.0.0
 --------------
 General
