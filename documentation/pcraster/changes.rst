@@ -7,16 +7,18 @@ This is a bug fix release for 4.0.
 
 .. General
 .. ^^^^^^^
-.. * The documentation of PCRaster operations was updated
-
-resample
-^^^^^^^^
-* Fixed a regression that caused the generation of MV in all cells while using the crop option (`Ticket #485 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/485/>`_)
+.. * The documentation of PCRaster operations was updated by the following operations (see the PCRaster `documentation <http://pcraster.geo.uu.nl/getting-started/documentation/>`_) page: TODOTODOTODOTODOTODOTODOTODOTODO
 
 PCRaster Python package
 ^^^^^^^^^^^^^^^^^^^^^^^
 * Fixed a wrong number of arguments in the base class for dynamic models (`Ticket #603 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/603/>`_)
 
+.. dynamicwave
+.. ^^^^^^^^^^^
+
+resample
+^^^^^^^^
+* Fixed a regression that caused the generation of MV in all cells while using the crop option (`Ticket #485 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/485/>`_)
 
 
 PCRaster 4.0.0
