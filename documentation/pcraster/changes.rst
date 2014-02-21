@@ -5,20 +5,36 @@ PCRaster 4.0.1
 --------------
 This is a bug fix release for 4.0.
 
-.. General
-.. ^^^^^^^
-.. * The documentation of PCRaster operations was updated by the following operations (see the PCRaster `documentation <http://pcraster.geo.uu.nl/getting-started/documentation/>`_) page: TODOTODOTODOTODOTODOTODOTODOTODO
+Global options ``chezy`` and ``manning`` for dynwavestate, dynwaveflux, dynamicwave (pcrcalc, PCRaster Python package)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+We discovered a documentation error for the operations dynwavestate, dynwaveflux and dynamicwave.
+The manual stated that the Chezy algorithm was the default algorithm to calculate the dynamic flow equation.
+In fact, it was calculated by the Manning algorithm by default.
+
+If you did not use any global option, your results were calculated by the Manning equation. From now on, without specifying global options, results will be calculated by the Manning equation as well.
+
+If you used either ``chezy`` or ``manning`` as global option, the corresponding algorithms were used. This behaviour remains unchanged.
+
+To obtain values calculated with the Chezy algorithm, you now need to specify explicitly either
+``--chezy`` on the command line, ``#! --chezy`` in PCRcalc scripts, or ``setglobaloption("chezy")`` in Python scripts.
+
+dynamicwave (pcrcalc, PCRaster Python package)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+We fixed a bug in the dynamicwave operation while using the Manning algorithm (`Ticket #609 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/609/>`_).
+As the Manning algorithm was used as default (see the remarks above) it is expected that your model results will change.
 
 PCRaster Python package
 ^^^^^^^^^^^^^^^^^^^^^^^
 * Fixed a wrong number of arguments in the base class for dynamic models (`Ticket #603 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/603/>`_)
 
-.. dynamicwave
-.. ^^^^^^^^^^^
-
 resample
 ^^^^^^^^
 * Fixed a regression that caused the generation of MV in all cells while using the crop option (`Ticket #485 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/485/>`_)
+
+Developer information
+^^^^^^^^^^^^^^^^^^^^^
+* Ported machine_status.py to newer apt_pkg, updated list of required applications for compiling PCRaster (`Ticket #610 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/610/>`_)
+
 
 
 PCRaster 4.0.0
