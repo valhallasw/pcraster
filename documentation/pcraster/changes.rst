@@ -20,7 +20,7 @@ To obtain values calculated with the Chezy algorithm, you now need to specify ex
 
 dynamicwave (pcrcalc, PCRaster Python package)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-We fixed a bug in the dynamicwave operation while using the Manning algorithm (`Ticket #609 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/609/>`_).
+We discovered and fixed a bug in the dynamicwave operation while using the Manning algorithm (`Ticket #609 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/609/>`_).
 As the Manning algorithm was used as default (see the remarks above) it is expected that your model results will change.
 
 PCRaster Python package
@@ -30,6 +30,10 @@ PCRaster Python package
 resample
 ^^^^^^^^
 * Fixed a regression that caused the generation of MV in all cells while using the crop option (`Ticket #485 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/485/>`_)
+
+Documentation
+^^^^^^^^^^^^^
+* The manual pages include updates for the mapattr application and the lookupstate and lookuppotential operations (`Ticket #613 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/613/>`_, `Ticket #601 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/601/>`_)
 
 Developer information
 ^^^^^^^^^^^^^^^^^^^^^
