@@ -23,6 +23,10 @@ dynamicwave (pcrcalc, PCRaster Python package)
 We discovered and fixed a bug in the dynamicwave operation while using the Manning algorithm (`Ticket #609 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/609/>`_).
 As the Manning algorithm was used as default (see the remarks above) it is expected that your model results will change.
 
+Aguila
+^^^^^^
+* Fixed '#624 cannot open .tss files in PCRASTER 4 aguila version' (`Ticket #624 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/624/>`_)
+
 PCRaster Python package
 ^^^^^^^^^^^^^^^^^^^^^^^
 * Fixed a wrong number of arguments in the base class for dynamic models (`Ticket #603 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/603/>`_)
