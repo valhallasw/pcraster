@@ -90,10 +90,6 @@ required_file_path_names = \
         "python/pcraster/collection/__init__.py",
         "python/pcraster/framework/__init__.py"
     ] + \
-    [
-        # Needed for pcrmf2k? Check pcrtree2's CMakeLists.txt.
-        os.path.join("bin", "cygwin1.dll")
-    ] if sys.platform == "win32" else [] + \
     executable_path_names + \
     [os.path.join("python", "pcraster", name) for name in [
         "__init__.py",
