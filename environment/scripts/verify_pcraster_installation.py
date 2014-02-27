@@ -76,7 +76,7 @@ required_file_path_names = \
         "modflow"
     ]] + \
     [
-        "bin/pcraster_modflow.xml",
+        "lib/pcraster_modflow.xml",
         "doc/developer/c/include/pcrcalc.h",
         "doc/developer/c/include/pcrdll.h",
         # "doc/developer/linkout/deployment.txt",
