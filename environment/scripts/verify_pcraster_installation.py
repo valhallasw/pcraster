@@ -131,6 +131,9 @@ def verify_installation(
             "pcraster.moc",
         ])
 
+    if sys.platform == "win32":
+        assert not os.path.exists(os.path.join(prefix, "bin", "python27.dll"))
+
     # TODO On Windows, make sure import libs are not installed.
 
 
