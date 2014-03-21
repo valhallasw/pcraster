@@ -70,13 +70,17 @@ required_directory_path_names=[
     "share/gdal"
 ] + verify_aguila_installation.required_directory_path_names
 
-required_file_path_names = \
+if sys.platform == "win32":
+    required_file_path_names = [ "bin/pcraster_modflow.xml" ]
+else:
+    required_file_path_names = [ "lib/pcraster_modflow.xml" ]
+
+required_file_path_names = required_file_path_names + \
     [os.path.join("doc", name, "index.html") for name in [
         "manual",
         "modflow"
     ]] + \
     [
-        "bin/pcraster_modflow.xml",
         "doc/developer/c/include/pcrcalc.h",
         "doc/developer/c/include/pcrdll.h",
         # "doc/developer/linkout/deployment.txt",
@@ -126,6 +130,9 @@ def verify_installation(
             "pcraster.mldd",
             "pcraster.moc",
         ])
+
+    if sys.platform == "win32":
+        assert not os.path.exists(os.path.join(prefix, "bin", "python27.dll"))
 
     # TODO On Windows, make sure import libs are not installed.
 

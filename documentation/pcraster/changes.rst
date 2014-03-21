@@ -35,6 +35,10 @@ resample
 ^^^^^^^^
 * Fixed a regression that caused the generation of MV in all cells while using the crop option (`Ticket #485 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/485/>`_)
 
+pcrcalc
+^^^^^^^
+* Fixed a redundant timestep output (`Ticket #625 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/625/>`_)
+
 Documentation
 ^^^^^^^^^^^^^
 * The manual pages include updates for the mapattr application and the lookupstate and lookuppotential operations (`Ticket #613 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/613/>`_, `Ticket #601 <https://sourceforge.net/p/pcraster/bugs-and-feature-requests/601/>`_)
