@@ -15,4 +15,4 @@ source "$_cwd_branch/PCRaster"
 unset _cwd_branch
 
 cd $PCRASTER
-setPromptForProject PCRaster $PCRSTER_BRANCH $BUILD_TYPE
+setPromptForProject PCRaster $PCRASTER_BRANCH $BUILD_TYPE
